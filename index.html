@@ -1,0 +1,2609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KRONK PROTOCOL — Train Like the Gold &amp; Red</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#15110d;
+    --bg-elev:#1d1711;
+    --bg-elev-2:#241c14;
+    --gold:#e8a93c;
+    --gold-bright:#f3bd5c;
+    --red:#c81e2c;
+    --red-deep:#5e1117;
+    --cream:#f3eee2;
+    --muted:#a89c89;
+    --muted-dim:#6f6555;
+    --line:#382c1f;
+    --font-display:'Bebas Neue', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    opacity:0.05;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;}
+  ul{margin:0;padding:0;list-style:none;}
+  h1,h2,h3{margin:0;}
+  button{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--gold-bright); outline-offset:3px;}
+
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:56px 0 36px;
+    background:
+      radial-gradient(120% 90% at 50% -10%, rgba(200,30,44,0.22), transparent 60%),
+      linear-gradient(180deg, #1a140e 0%, var(--bg) 70%);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:-1px; height:6px;
+    background:repeating-linear-gradient(90deg, var(--gold) 0 28px, var(--red) 28px 56px);
+    opacity:0.85;
+  }
+  .hero-inner{position:relative; z-index:2;}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.18em;
+    color:var(--gold);
+    margin:0 0 14px;
+    opacity:0;
+    animation:rise 0.6s ease forwards;
+  }
+  .hero-title{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:clamp(54px, 15vw, 92px);
+    line-height:0.86;
+    letter-spacing:0.01em;
+    color:var(--cream);
+    opacity:0;
+    animation:rise 0.7s ease 0.08s forwards;
+  }
+  .hero-title .accent{
+    color:var(--gold-bright);
+    -webkit-text-stroke:1px rgba(200,30,44,0.6);
+  }
+  .hero-sub{
+    font-family:var(--font-mono);
+    font-size:14px;
+    color:var(--muted);
+    margin:14px 0 18px;
+    opacity:0;
+    animation:rise 0.7s ease 0.16s forwards;
+  }
+  .hero-intro{
+    font-size:15.5px;
+    color:#d9d0c0;
+    max-width:62ch;
+    margin:0 0 22px;
+    opacity:0;
+    animation:rise 0.7s ease 0.24s forwards;
+  }
+  .hero-intro b{color:var(--gold-bright); font-weight:700;}
+  .hero-note{
+    font-size:12.5px;
+    color:var(--muted-dim);
+    font-style:italic;
+    margin:0 0 26px;
+    opacity:0;
+    animation:rise 0.7s ease 0.3s forwards;
+  }
+  @keyframes rise{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .code-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    opacity:0;
+    animation:rise 0.7s ease 0.36s forwards;
+  }
+  .code-tag{
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    padding:10px 12px;
+  }
+  .code-tag b{
+    display:block;
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:var(--gold-bright);
+    margin-bottom:3px;
+  }
+  .code-tag span{font-size:12.5px; color:var(--muted);}
+
+  /* ---------- FOLDER NAV (hub level) ---------- */
+  .folder-tabs{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding:22px 20px 26px;
+  }
+  .folder-tab{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+    text-align:left;
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    border-left:3px solid var(--muted-dim);
+    padding:14px 16px;
+    cursor:pointer;
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .folder-tab:hover{border-left-color:var(--gold);}
+  .folder-tab.active{
+    border-left-color:var(--red);
+    background:linear-gradient(90deg, rgba(200,30,44,0.12), transparent 60%);
+  }
+  .folder-name{
+    font-family:var(--font-display);
+    font-size:24px;
+    letter-spacing:0.01em;
+    color:var(--cream);
+  }
+  .folder-tab.active .folder-name{color:var(--gold-bright);}
+  .folder-sub{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--muted);
+  }
+  .folder-panel{display:none;}
+  .folder-panel.active{display:block; animation:fadein 0.35s ease;}
+
+  /* ---------- DAY TABS ---------- */
+  .day-tabs{
+    position:sticky; top:0; z-index:20;
+    display:flex;
+    gap:0;
+    background:rgba(21,17,13,0.96);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;
+  }
+  .day-tab{
+    flex:1 0 auto;
+    min-width:120px;
+    background:transparent;
+    border:none;
+    border-right:1px solid var(--line);
+    color:var(--muted);
+    padding:14px 10px 12px;
+    cursor:pointer;
+    text-align:left;
+    transition:background 0.2s ease;
+  }
+  .day-tab:last-child{border-right:none;}
+  .day-tab:hover{background:var(--bg-elev);}
+  .day-tab .dt-day{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    display:block;
+  }
+  .day-tab .dt-name{
+    font-family:var(--font-display);
+    font-size:19px;
+    letter-spacing:0.01em;
+    display:block;
+    color:var(--cream);
+    margin-top:2px;
+  }
+  .day-tab.active{
+    background:linear-gradient(180deg, rgba(232,169,60,0.14), rgba(200,30,44,0.08));
+    box-shadow:inset 0 -3px 0 var(--gold);
+  }
+  .day-tab.active .dt-day{color:var(--gold-bright);}
+
+  /* ---------- DAY PANEL ---------- */
+  main{padding:30px 0 10px;}
+  .day-panel{display:none; animation:fadein 0.35s ease;}
+  .day-panel.active{display:block;}
+  @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .bout-tag{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    color:var(--red);
+    background:rgba(200,30,44,0.12);
+    border:1px solid rgba(200,30,44,0.4);
+    padding:4px 9px;
+    display:inline-block;
+  }
+  .technique-header h2{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:clamp(30px,7vw,42px);
+    line-height:1.04;
+    margin:12px 0 6px;
+    color:var(--cream);
+  }
+  .credit{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--gold);
+    margin:0 0 16px;
+  }
+  .technique-intro{
+    font-size:15px;
+    color:#d9d0c0;
+    margin:0 0 26px;
+  }
+
+  /* ---------- SPEC CARD ---------- */
+  .spec-card{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-bottom:30px;
+  }
+  .spec-col{background:var(--bg-elev); padding:16px 16px 18px;}
+  .spec-col h3{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    color:var(--gold-bright);
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .spec-col h3::before{content:""; width:6px; height:6px; background:var(--red); display:inline-block;}
+  .spec-col li{
+    font-size:13.5px;
+    color:#cfc6b6;
+    padding:7px 0;
+    border-top:1px dashed var(--line);
+  }
+  .spec-col li:first-of-type{border-top:none;}
+
+  /* ---------- WORKOUT ---------- */
+  .workout-title{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.16em;
+    color:var(--muted);
+    margin:0 0 14px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  .round-card{
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    margin-bottom:10px;
+  }
+  .round-card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 14px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .round-label{
+    font-family:var(--font-display);
+    font-size:18px;
+    letter-spacing:0.02em;
+    color:var(--cream);
+  }
+  .round-time{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--gold);
+    background:rgba(232,169,60,0.1);
+    border:1px solid rgba(232,169,60,0.3);
+    padding:3px 8px;
+  }
+  .round-chevron{
+    font-family:var(--font-mono);
+    color:var(--muted-dim);
+    margin-left:8px;
+    transition:transform 0.2s ease;
+  }
+  .round-card.open .round-chevron{transform:rotate(180deg);}
+  .exercise-list{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.3s ease;
+    border-top:1px solid transparent;
+  }
+  .round-card.open .exercise-list{
+    max-height:1200px;
+    border-top:1px solid var(--line);
+  }
+  .exercise-list li{
+    padding:11px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .exercise-list li:last-child{border-bottom:none;}
+  .exercise-list label{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    cursor:pointer;
+    font-size:13.5px;
+    color:#d9d0c0;
+  }
+  .exercise-list input[type="checkbox"]{
+    appearance:none;
+    -webkit-appearance:none;
+    width:17px; height:17px;
+    min-width:17px;
+    border:1.5px solid var(--muted-dim);
+    background:transparent;
+    margin-top:2px;
+    cursor:pointer;
+    position:relative;
+  }
+  .exercise-list input[type="checkbox"]:checked{
+    background:var(--gold);
+    border-color:var(--gold);
+  }
+  .exercise-list input[type="checkbox"]:checked::after{
+    content:"✓";
+    position:absolute; top:-3px; left:2px;
+    font-size:12px; color:#1a140e; font-weight:800;
+  }
+  .exercise-list li.done label{color:var(--muted-dim); text-decoration:line-through;}
+  .ex-cue{display:block; font-size:12px; color:var(--muted); margin-top:3px; font-style:italic;}
+  .ex-cue b{color:var(--gold); font-style:normal;}
+
+  /* ---------- VAULT / SKILL LIBRARY ---------- */
+  .vault-intro{
+    font-size:15px;
+    color:#d9d0c0;
+    margin:12px 0 22px;
+  }
+  .focus-box{
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    padding:14px 16px;
+    margin-bottom:24px;
+  }
+  .focus-box h3{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    color:var(--gold-bright);
+    margin-bottom:8px;
+  }
+  .focus-empty{font-size:12.5px; color:var(--muted-dim); font-style:italic;}
+  .focus-chip{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--cream);
+    background:var(--bg-elev-2);
+    border:1px solid var(--line);
+    padding:4px 9px;
+    margin:0 6px 6px 0;
+  }
+  .skill-card{
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    border-left:3px solid var(--red);
+    margin-bottom:10px;
+  }
+  .skill-card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:13px 14px;
+    cursor:pointer;
+    user-select:none;
+    gap:10px;
+  }
+  .skill-head-left{display:flex; flex-direction:column; gap:3px; min-width:0;}
+  .skill-tag{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:0.1em;
+    color:var(--red);
+  }
+  .skill-name{
+    font-family:var(--font-display);
+    font-size:19px;
+    letter-spacing:0.01em;
+    color:var(--cream);
+  }
+  .skill-head-right{display:flex; align-items:center; gap:10px; flex-shrink:0;}
+  .star-btn{
+    background:transparent;
+    border:1.5px solid var(--muted-dim);
+    color:var(--muted-dim);
+    width:30px; height:30px;
+    font-size:15px;
+    line-height:1;
+    cursor:pointer;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition:all 0.2s ease;
+  }
+  .star-btn.selected{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:#1a140e;
+  }
+  .skill-chevron{font-family:var(--font-mono); color:var(--muted-dim); transition:transform 0.2s ease;}
+  .skill-card.open .skill-chevron{transform:rotate(180deg);}
+  .skill-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.35s ease;
+  }
+  .skill-card.open .skill-body{
+    max-height:2000px;
+    border-top:1px solid var(--line);
+  }
+  .skill-desc{
+    font-size:13.5px;
+    color:#d9d0c0;
+    padding:14px 14px 0;
+    margin:0;
+  }
+  .skill-spec{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    margin:14px;
+    border:1px solid var(--line);
+  }
+  .skill-spec-col{background:var(--bg-elev-2); padding:12px 13px;}
+  .skill-spec-col h4{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    color:var(--gold-bright);
+    margin:0 0 8px;
+  }
+  .skill-spec-col li{
+    font-size:12.5px;
+    color:#cfc6b6;
+    padding:6px 0;
+    border-top:1px dashed var(--line);
+  }
+  .skill-spec-col li:first-of-type{border-top:none;}
+  .skill-drill{margin:0 14px 16px;}
+  .skill-drill h4{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    color:var(--muted);
+    margin:0 0 8px;
+  }
+  .skill-drill li{
+    font-size:12.5px;
+    color:#cfc6b6;
+    padding:6px 0 6px 14px;
+    border-top:1px dashed var(--line);
+    position:relative;
+  }
+  .skill-drill li:first-of-type{border-top:none;}
+  .skill-drill li::before{content:"→"; position:absolute; left:0; color:var(--red);}
+  .skill-workout{margin:0 14px 16px;}
+  .skill-workout-title{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    color:var(--muted);
+    margin:16px 0 10px;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--line);
+  }
+
+  @media (max-width:480px){
+    .skill-spec{grid-template-columns:1fr;}
+  }
+
+  /* ---------- STANCE DIAGRAMS ---------- */
+  .stance-diagrams{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:16px 0 22px;
+  }
+  .diagram-card{
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    padding:12px 8px 14px;
+  }
+  .diagram-card h4{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:0.1em;
+    color:var(--gold-bright);
+    margin:0 0 8px;
+    text-align:center;
+  }
+  .stance-svg{width:100%; height:auto; display:block;}
+  .svg-lbl{font-family:var(--font-mono);}
+  .fill-gold{fill:var(--gold-bright);}
+  .fill-red{fill:var(--red);}
+  .fill-cream{fill:var(--cream);}
+  .fill-muted{fill:var(--muted);}
+  .fill-muted-dim{fill:var(--muted-dim);}
+  .fill-none{fill:none;}
+  .stroke-gold{stroke:var(--gold-bright);}
+  .stroke-red{stroke:var(--red);}
+  .stroke-cream{stroke:var(--cream);}
+  .stroke-muted{stroke:var(--muted-dim);}
+  @media (max-width:420px){
+    .stance-diagrams{grid-template-columns:1fr;}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    margin-top:40px;
+    padding:26px 0 50px;
+    border-top:1px solid var(--line);
+  }
+  .week-table{width:100%; border-collapse:collapse; font-size:13px; margin-bottom:18px;}
+  .week-table td{padding:8px 6px; border-bottom:1px solid var(--line); color:var(--muted);}
+  .week-table td.wd{font-family:var(--font-mono); color:var(--gold); width:70px;}
+  .week-table td.wn{color:var(--cream); font-weight:600;}
+  .rest-note{
+    font-size:13px;
+    color:var(--muted);
+    background:var(--bg-elev);
+    border-left:3px solid var(--red);
+    padding:12px 14px;
+  }
+  .rest-note b{color:var(--cream);}
+  .foot-fine{font-family:var(--font-mono); font-size:10.5px; color:var(--muted-dim); margin-top:20px;}
+
+  @media (max-width:480px){
+    .code-row{grid-template-columns:1fr;}
+    .spec-card{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">THREE FIGHTERS · THREE BLUEPRINTS · ONE GYM BAG</p>
+    <h1 class="hero-title">FIGHT<br><span class="accent">HUB</span></h1>
+    <p class="hero-sub">KRONK &nbsp;·&nbsp; SUGAR RAY LEONARD &nbsp;·&nbsp; ROBERTO DURAN</p>
+    <p class="hero-intro">Three different blueprints for becoming dangerous in a ring — Detroit's gold-and-red pressure-jab system, Sugar Ray Leonard's blinding adaptability, and Roberto Duran's relentless inside pressure. <b>Pick a folder below.</b> Inside each one you'll find the stance, the signature techniques, and exactly where your feet and hands belong for every single one.</p>
+  </div>
+</header>
+
+<nav class="folder-tabs wrap" id="folderTabs">
+  <button class="folder-tab active" data-folder="kronk">
+    <span class="folder-name">Kronk Protocol</span>
+    <span class="folder-sub">Hearns · Sims Jr. — range &amp; finishing power</span>
+  </button>
+  <button class="folder-tab" data-folder="sugarray">
+    <span class="folder-name">Sugar Ray Leonard</span>
+    <span class="folder-sub">Speed, adaptability, showtime tricks</span>
+  </button>
+  <button class="folder-tab" data-folder="duran">
+    <span class="folder-name">Roberto Duran</span>
+    <span class="folder-sub">Manos de Piedra — pressure &amp; infighting</span>
+  </button>
+</nav>
+
+<div class="wrap">
+  <div class="focus-box">
+    <h3>MY FOCUS LIST</h3>
+    <div id="focusListEmpty" class="focus-empty">Nothing selected yet — tap the circle on any skill card to add it here, from any folder.</div>
+    <div id="focusListChips"></div>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- FOLDER: KRONK PROTOCOL                                   -->
+<!-- ======================================================= -->
+<div class="folder-panel active" data-folder="kronk">
+
+  <div class="wrap">
+    <span class="bout-tag">FOLDER 1 — KRONK</span>
+    <div class="technique-header">
+      <h2>Kronk Protocol</h2>
+      <p class="credit">Thomas "Hitman" Hearns &amp; Anthony "The Magician" Sims Jr. · Kronk Gym, Detroit</p>
+    </div>
+    <p class="technique-intro">The Kronk style was built in the basement of a Detroit rec center under trainer Emanuel Steward — gold and red trunks, a sweatbox gym, and one philosophy: <b>control range with the jab, load every cross with knockout power, and never stand still long enough to get hit back.</b> It turned Hearns into a five-division world champion, and it still shapes fighters today through the Kronk lineage, including modern light heavyweight Anthony Sims Jr.</p>
+    <div class="code-row">
+      <div class="code-tag"><b>01 · CONTROL THE RANGE</b><span>Your jab decides where the fight happens.</span></div>
+      <div class="code-tag"><b>02 · LOAD EVERY CROSS</b><span>If it's not going to hurt, don't throw it.</span></div>
+      <div class="code-tag"><b>03 · NEVER REPEAT</b><span>The same combo twice means they've solved you.</span></div>
+      <div class="code-tag"><b>04 · ANGLES KILL</b><span>Straight back is a target. Pivot, don't retreat.</span></div>
+    </div>
+
+    <h3 class="workout-title">BASE STANCE — RANGE &amp; REACH</h3>
+    <div class="stance-diagrams">
+      <div class="diagram-card">
+        <h4>FOOT POSITION — TOP VIEW</h4>
+        <svg viewBox="0 0 220 220" class="stance-svg" role="img" aria-label="Kronk stance foot position, viewed from above">
+          <line x1="110" y1="28" x2="110" y2="10" class="stroke-muted" stroke-width="1.5"/>
+          <polygon points="110,4 104,14 116,14" class="fill-muted-dim"/>
+          <text x="110" y="42" text-anchor="middle" class="svg-lbl fill-muted" font-size="9">OPPONENT</text>
+          <line x1="110" y1="50" x2="110" y2="198" class="stroke-muted" stroke-width="1" stroke-dasharray="3,3"/>
+          <ellipse cx="85" cy="80" rx="14" ry="27" class="fill-none stroke-gold" stroke-width="2" transform="rotate(-6 85 80)"/>
+          <text x="85" y="84" text-anchor="middle" class="svg-lbl fill-gold" font-size="11">L</text>
+          <ellipse cx="142" cy="150" rx="13" ry="25" class="fill-none stroke-red" stroke-width="2" transform="rotate(48 142 150)"/>
+          <text x="142" y="154" text-anchor="middle" class="svg-lbl fill-red" font-size="11">R</text>
+          <text x="85" y="114" text-anchor="middle" class="svg-lbl fill-gold" font-size="9">45%</text>
+          <text x="142" y="182" text-anchor="middle" class="svg-lbl fill-red" font-size="9">55%</text>
+          <text x="110" y="210" text-anchor="middle" class="svg-lbl fill-muted" font-size="8">TALLER &amp; WIDER — BUILT FOR REACH</text>
+        </svg>
+      </div>
+      <div class="diagram-card">
+        <h4>GUARD — FRONT VIEW</h4>
+        <svg viewBox="0 0 220 230" class="stance-svg" role="img" aria-label="Kronk guard, hand and chin position">
+          <path d="M75,68 L145,68 L156,222 L64,222 Z" class="fill-none stroke-muted" stroke-width="1.5"/>
+          <circle cx="110" cy="40" r="20" class="fill-none stroke-cream" stroke-width="2"/>
+          <line x1="110" y1="58" x2="98" y2="68" class="stroke-gold" stroke-width="1.5"/>
+          <line x1="76" y1="80" x2="96" y2="69" class="stroke-muted" stroke-width="1" stroke-dasharray="2,2"/>
+          <text x="6" y="78" class="svg-lbl fill-gold" font-size="9">CHIN</text>
+          <text x="6" y="89" class="svg-lbl fill-gold" font-size="9">TUCKED</text>
+          <circle cx="145" cy="78" r="12" class="fill-red"/>
+          <text x="165" y="68" class="svg-lbl fill-red" font-size="9">REAR</text>
+          <text x="165" y="79" class="svg-lbl fill-red" font-size="9">HAND</text>
+          <circle cx="55" cy="110" r="12" class="fill-gold"/>
+          <text x="6" y="108" class="svg-lbl fill-gold" font-size="9">LEAD</text>
+          <text x="6" y="119" class="svg-lbl fill-gold" font-size="9">HAND</text>
+          <text x="4" y="132" class="svg-lbl fill-muted" font-size="8">(extended,</text>
+          <text x="4" y="142" class="svg-lbl fill-muted" font-size="8">active)</text>
+          <line x1="150" y1="86" x2="155" y2="135" class="stroke-red" stroke-width="1.5" stroke-dasharray="2,2"/>
+          <text x="158" y="142" class="svg-lbl fill-muted" font-size="8">elbow in</text>
+        </svg>
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-col">
+        <h3>FEET</h3>
+        <ul>
+          <li>Tall, slightly bladed orthodox stance. Lead foot points at the target, rear foot turned out ~45°, a touch wider than a standard stance to use your full reach.</li>
+          <li>Weight close to even at rest, riding toward the back foot (about 55%) when probing range with the jab.</li>
+        </ul>
+      </div>
+      <div class="spec-col">
+        <h3>HANDS</h3>
+        <ul>
+          <li>Lead hand active and slightly extended rather than glued to the cheek — always ready to measure range.</li>
+          <li>Rear hand tucked tight at the cheekbone, elbow protecting the ribs. Chin tucked behind the lead shoulder.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <nav class="day-tabs wrap" id="dayTabs">
+    <button class="day-tab active" data-day="tue">
+      <span class="dt-day">TUE · BOUT 1</span>
+      <span class="dt-name">Range War</span>
+    </button>
+    <button class="day-tab" data-day="thu">
+      <span class="dt-day">THU · BOUT 2</span>
+      <span class="dt-name">The Angle</span>
+    </button>
+    <button class="day-tab" data-day="sat">
+      <span class="dt-day">SAT · BOUT 3</span>
+      <span class="dt-name">The Finish</span>
+    </button>
+    <button class="day-tab" data-day="vault">
+      <span class="dt-day">SKILL VAULT</span>
+      <span class="dt-name">Pick &amp; Master</span>
+    </button>
+  </nav>
+
+  <main class="wrap">
+
+  <!-- ============ TUESDAY ============ -->
+  <section class="day-panel active" data-day="tue">
+    <span class="bout-tag">BOUT 1 — RANGE WAR</span>
+    <div class="technique-header">
+      <h2>The Pawing Jab &amp; Stiff-Arm Control</h2>
+      <p class="credit">Thomas "Hitman" Hearns · Kronk Gym, Detroit</p>
+    </div>
+    <p class="technique-intro">Hearns' jab wasn't just a punch that scored points — it was a steering wheel. He used a long, pawing jab to find distance, a quicker flicker jab to freeze opponents and break their rhythm, and at times turned the same lead hand into a stiff-arm or collar-tie to control an opponent's head and balance. The jab decides everything that comes after it. Master this and the cross becomes a formality.</p>
+
+    <div class="spec-card">
+      <div class="spec-col">
+        <h3>FEET</h3>
+        <ul>
+          <li>Stand slightly taller than your usual stance — Hearns used his height, you use your reach.</li>
+          <li>Lead foot points straight at the target. Back foot turned out ~45°, stance a touch wider than normal to support a long, extended jab.</li>
+          <li>Weight rides 55% on the back foot at range — this lets the front foot fire and recover without dragging your balance forward.</li>
+          <li>Push the jab off the ball of the back foot, never the heel.</li>
+        </ul>
+      </div>
+      <div class="spec-col">
+        <h3>HANDS</h3>
+        <ul>
+          <li>Lead hand floats slightly more extended than a normal guard — active and out in space, not glued to the cheek.</li>
+          <li>Rear hand stays tight at the cheekbone, elbow tucked to the ribs. This is your insurance while the lead hand works.</li>
+          <li>Pawing jab: extend slow, fingers loosely open like you're measuring distance, snap shut only the last few inches.</li>
+          <li>Flicker jab: same line, but fast and short — just enough to block vision and break timing.</li>
+          <li>Stiff-arm: extend the jab and instead of fully retracting, rest the glove on the target's shoulder line for half a second before pulling back.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="workout-title">TODAY'S WORK</h3>
+
+    <div class="round-card open" data-key="tue-r1">
+      <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">10 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="tue-r1-0"><label><input type="checkbox"><span>Jump rope — 3 x 3 min<span class="ex-cue"><b>Feet:</b> stay tall, light on the balls of the feet, the same posture you'll jab from.</span></span></label></li>
+        <li data-id="tue-r1-1"><label><input type="checkbox"><span>Shadow boxing — 2 x 2 min, jab only<span class="ex-cue"><b>Hands:</b> just measuring an imaginary opponent, no other punches.</span></span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="tue-r2">
+      <div class="round-card-head"><span><span class="round-label">JAB MASTERY</span></span><span class="round-time">25 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="tue-r2-0"><label><input type="checkbox"><span>Long pawing jab — shadow box, 4 x 2 min<span class="ex-cue">Extend slow and full, snap back. Let the lead hand hang out in space between reps, like Hearns did.</span></span></label></li>
+        <li data-id="tue-r2-1"><label><input type="checkbox"><span>Flicker jab — shadow box, 3 x 2 min<span class="ex-cue">Short, fast, doubled up: jab-jab. Goal is rhythm disruption, not power.</span></span></label></li>
+        <li data-id="tue-r2-2"><label><input type="checkbox"><span>Stiff-arm drill — heavy bag, 3 x 2 min<span class="ex-cue">Jab and hold contact on the bag for half a second before retracting — practicing the collar-tie control.</span></span></label></li>
+        <li data-id="tue-r2-3"><label><input type="checkbox"><span>Jab-Cross fundamentals — heavy bag, 5 x 3 min<span class="ex-cue">Jab, jab, cross. Alternate which jab (pawing vs. flicker) sets up the cross each round.</span></span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="tue-r3">
+      <div class="round-card-head"><span><span class="round-label">RANGE FOOTWORK</span></span><span class="round-time">15 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="tue-r3-0"><label><input type="checkbox"><span>Circle &amp; reset drill — 5 min continuous<span class="ex-cue"><b>Feet:</b> circle away while keeping the jab active; never let an imaginary opponent close range without eating a jab first.</span></span></label></li>
+        <li data-id="tue-r3-1"><label><input type="checkbox"><span>Step-back jab — 4 x 2 min<span class="ex-cue"><b>Feet:</b> back foot steps back first, then jab as you retreat — this keeps range as you exit.</span></span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="tue-r4">
+      <div class="round-card-head"><span><span class="round-label">CONDITIONING</span></span><span class="round-time">10 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="tue-r4-0"><label><input type="checkbox"><span>Sprints — 6 x 30m, full effort</span></label></li>
+        <li data-id="tue-r4-1"><label><input type="checkbox"><span>Battle ropes — 3 x 40 sec</span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="tue-r5">
+      <div class="round-card-head"><span><span class="round-label">CORE + COOL DOWN</span></span><span class="round-time">13 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="tue-r5-0"><label><input type="checkbox"><span>Plank — 3 x 1 min</span></label></li>
+        <li data-id="tue-r5-1"><label><input type="checkbox"><span>Sit-ups — 3 x 25</span></label></li>
+        <li data-id="tue-r5-2"><label><input type="checkbox"><span>Full body stretch — 5 min, focus on shoulders</span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ THURSDAY ============ -->
+  <section class="day-panel" data-day="thu">
+    <span class="bout-tag">BOUT 2 — THE ANGLE</span>
+    <div class="technique-header">
+      <h2>Pivot Power &amp; The Never-Repeat Combo</h2>
+      <p class="credit">Anthony "The Magician" Sims Jr. · Kronk Lineage</p>
+    </div>
+    <p class="technique-intro">Sims Jr. earned the nickname "The Magician" because opponents could never predict where the next shot was coming from. He generates knockout power from angles most fighters don't bother to find — pivoting off a jab instead of standing and trading, switching his combination mid-stream so the fourth punch never matches what the first three suggested. The lesson: power isn't just hip rotation, it's hip rotation from an angle your opponent didn't see you create.</p>
+
+    <div class="spec-card">
+      <div class="spec-col">
+        <h3>FEET</h3>
+        <ul>
+          <li>Start square in your normal stance, but treat your lead foot as a pivot point, not just an anchor.</li>
+          <li>After your jab lands, pivot on the ball of the lead foot 30–45° — this rotates your whole body off the line your opponent is aiming at.</li>
+          <li>Rear foot follows the pivot, replanting to re-establish a full stance at the new angle.</li>
+          <li>Stay on the balls of both feet through the pivot — flat feet can't turn fast enough.</li>
+        </ul>
+      </div>
+      <div class="spec-col">
+        <h3>HANDS</h3>
+        <ul>
+          <li>Hands stay exactly where they are during the pivot. The angle change comes from your feet and hips — not from dropping the guard to "help" you turn.</li>
+          <li>Load power into the rear hand by coiling the rear hip and shoulder back slightly before you throw. Bigger coil, bigger snap.</li>
+          <li>After any 2–3 punch combo, the next punch should never match the pattern your opponent just saw. Threw jab-cross-hook? Don't follow with hook again — switch to an uppercut or a body shot from the new angle.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="workout-title">TODAY'S WORK</h3>
+
+    <div class="round-card open" data-key="thu-r1">
+      <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">10 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="thu-r1-0"><label><input type="checkbox"><span>Jump rope — 3 x 3 min<span class="ex-cue">Add a quarter-turn pivot every 10th skip.</span></span></label></li>
+        <li data-id="thu-r1-1"><label><input type="checkbox"><span>Shadow boxing — 2 x 2 min, pivots only<span class="ex-cue">No punches — just feel the rotation, find your balance point through the turn.</span></span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="thu-r2">
+      <div class="round-card-head"><span><span class="round-label">PIVOT POWER</span></span><span class="round-time">25 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="thu-r2-0"><label><input type="checkbox"><span>Static pivot drill — 10 min, 15 reps each side<span class="ex-cue">From your stance: jab, pivot 45° off the lead foot, reset stance, repeat.</span></span></label></li>
+        <li data-id="thu-r2-1"><label><input type="checkbox"><span>Pivot + cross — heavy bag, 4 x 3 min<span class="ex-cue">Jab, pivot off the bag's centerline, then rip a cross from the new angle.</span></span></label></li>
+        <li data-id="thu-r2-2"><label><input type="checkbox"><span>Box jumps — 4 x 8</span></label></li>
+        <li data-id="thu-r2-3"><label><input type="checkbox"><span>Med ball rotational slams — 4 x 10 each side<span class="ex-cue">Same hip-snap you're training in the pivot — make it explosive.</span></span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="thu-r3">
+      <div class="round-card-head"><span><span class="round-label">NEVER-REPEAT ROUNDS</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="thu-r3-0"><label><input type="checkbox"><span>Heavy bag — 6 x 3 min, rotate combos every round<span class="ex-cue">Never throw the same combo back-to-back. Rotate: <b>A)</b> Jab → Cross → Pivot Hook &nbsp;<b>B)</b> Double Jab → Pivot → Uppercut &nbsp;<b>C)</b> Jab to Body → Cross → Pivot → Hook to Head.</span></span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="thu-r4">
+      <div class="round-card-head"><span><span class="round-label">CONDITIONING</span></span><span class="round-time">10 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="thu-r4-0"><label><input type="checkbox"><span>Tabata bag bursts — 10 x 20 sec on / 10 sec rest, all-out</span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="thu-r5">
+      <div class="round-card-head"><span><span class="round-label">CORE + COOL DOWN</span></span><span class="round-time">13 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="thu-r5-0"><label><input type="checkbox"><span>Russian twists — 3 x 20</span></label></li>
+        <li data-id="thu-r5-1"><label><input type="checkbox"><span>Hanging leg raises — 3 x 15</span></label></li>
+        <li data-id="thu-r5-2"><label><input type="checkbox"><span>Hip openers + shoulder stretch — 5 min</span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SATURDAY ============ -->
+  <section class="day-panel" data-day="sat">
+    <span class="bout-tag">BOUT 3 — THE FINISH</span>
+    <div class="technique-header">
+      <h2>The Chopping Cross &amp; Full Fight Simulation</h2>
+      <p class="credit">Hearns' Finisher + Sims' Angles, Combined</p>
+    </div>
+    <p class="technique-intro">Hearns' jab created the opening — but the chopping right cross is what ended fights. Instead of a flat, straight cross, he threw his right hand on a slight downward angle, chopping over a guard that had been lowered or distracted by the jab. Combine that finishing power with Sims Jr.'s habit of creating an angle first, and you get the full Kronk formula: control range, create an angle, then chop the finishing shot down through the opening. Today you put the whole week together.</p>
+
+    <div class="spec-card">
+      <div class="spec-col">
+        <h3>FEET</h3>
+        <ul>
+          <li>Same base stance — but as you throw the chopping cross, drive up and slightly forward off the back foot. Power comes from the floor up, not just the shoulder.</li>
+          <li>If you've pivoted first (Thursday's skill), the chopping cross now arrives from an angle your opponent isn't braced for. That's the whole point of stacking these two days.</li>
+        </ul>
+      </div>
+      <div class="spec-col">
+        <h3>HANDS</h3>
+        <ul>
+          <li>The chopping cross doesn't travel flat — it arcs slightly downward, like you're throwing it OVER something rather than through it.</li>
+          <li>Drop the rear shoulder slightly as you load, then drive up and over as you release. Your fist finishes higher than where the target's chin started — you've come down on top of it.</li>
+          <li>Lead hand stays up and tight to your own chin the instant you commit to the cross. This is the one punch where over-committing gets you caught.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="workout-title">TODAY'S WORK</h3>
+
+    <div class="round-card open" data-key="sat-r1">
+      <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">15 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="sat-r1-0"><label><input type="checkbox"><span>Easy run or treadmill — 15–20 min</span></label></li>
+        <li data-id="sat-r1-1"><label><input type="checkbox"><span>Jump rope — 3 x 3 min</span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="sat-r2">
+      <div class="round-card-head"><span><span class="round-label">CHOPPING CROSS</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="sat-r2-0"><label><input type="checkbox"><span>Shadow boxing — 4 x 2 min, jab then chopping cross only<span class="ex-cue">Exaggerate the downward arc until it feels natural.</span></span></label></li>
+        <li data-id="sat-r2-1"><label><input type="checkbox"><span>Heavy bag — 5 x 3 min: jab, pivot, chopping cross<span class="ex-cue">Every rep finishes with the fist higher than where it started arcing down.</span></span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="sat-r3">
+      <div class="round-card-head"><span><span class="round-label">9-ROUND FIGHT SIM</span></span><span class="round-time">35 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="sat-r3-0"><label><input type="checkbox"><span>R1 — Jab only (Tuesday's skill): range and control</span></label></li>
+        <li data-id="sat-r3-1"><label><input type="checkbox"><span>R2 — Pivots only (Thursday's skill): no punching, just create angles</span></label></li>
+        <li data-id="sat-r3-2"><label><input type="checkbox"><span>R3 — Chopping cross focus: jab, pivot, chop</span></label></li>
+        <li data-id="sat-r3-3"><label><input type="checkbox"><span>R4 — Never-repeat combos: full combo variety</span></label></li>
+        <li data-id="sat-r3-4"><label><input type="checkbox"><span>R5 — Pressure: walk forward, jab to body, cut off the ring</span></label></li>
+        <li data-id="sat-r3-5"><label><input type="checkbox"><span>R6 — Pure defense: slip and move, zero punches</span></label></li>
+        <li data-id="sat-r3-6"><label><input type="checkbox"><span>R7 — Everything: full Kronk arsenal combined</span></label></li>
+        <li data-id="sat-r3-7"><label><input type="checkbox"><span>R8 — Steal the round: coast 2:30, explode the last :30</span></label></li>
+        <li data-id="sat-r3-8"><label><input type="checkbox"><span>R9 — Cool-down: slow rhythm boxing, breathe it out</span></label></li>
+      </ul>
+      <p style="font-family:var(--font-mono); font-size:11px; color:var(--muted-dim); padding:0 14px 12px;">Use your phone's stopwatch or a separate round-timer app — 3 min work / 1 min rest, 9 rounds.</p>
+    </div>
+
+    <div class="round-card" data-key="sat-r4">
+      <div class="round-card-head"><span><span class="round-label">SPEED BAG + FINISHER</span></span><span class="round-time">18 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="sat-r4-0"><label><input type="checkbox"><span>Speed bag — 3 x 3 min, rhythm and timing</span></label></li>
+        <li data-id="sat-r4-1"><label><input type="checkbox"><span>Circuit x 3: push-ups 20 → pull-ups 12 → squats 20 → sprint 30 sec → rest 1 min</span></label></li>
+      </ul>
+    </div>
+
+    <div class="round-card" data-key="sat-r5">
+      <div class="round-card-head"><span><span class="round-label">COOL DOWN</span></span><span class="round-time">10 MIN <span class="round-chevron">▾</span></span></div>
+      <ul class="exercise-list">
+        <li data-id="sat-r5-0"><label><input type="checkbox"><span>Full body stretch — hips, shoulders, hamstrings, neck</span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SKILL VAULT ============ -->
+  <section class="day-panel" data-day="vault">
+    <span class="bout-tag">THE LIBRARY</span>
+    <div class="technique-header">
+      <h2>Skill Vault</h2>
+      <p class="credit">More of what the Kronk gym is known for</p>
+    </div>
+    <p class="vault-intro">Your 3-day program covers the jab, the pivot, and the chopping cross. Here's the rest of the Kronk vocabulary — techniques pulled from across the gym's history. Each one has its own stance, because the way your feet and hands sit changes with what you're throwing. Tap a card to open it, tap the circle to add it to your focus list at the top of the page.</p>
+
+    <!-- Skill 1 -->
+    <div class="skill-card" data-skill-id="skill-power-jab">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">LENNOX LEWIS · KRONK</span>
+          <span class="skill-name">The Power Jab</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Most fighters treat the jab as a tool to measure distance. Steward took Lewis's ordinary jab and turned it into a weapon on its own — thrown with real force, not just to set up something else. Paired with a heavy straight right, it became one of the most damaging one-twos in the sport, capable of hurting an opponent before the right hand ever lands.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Same orthodox base, but plant slightly heavier on the lead foot as you throw — you're driving through the target, not just touching it.</li>
+              <li>Back foot stays grounded to anchor the rotation. This isn't a step-in jab, it's a loaded one from your existing range.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Rotate the lead shoulder and hip into the punch the way you would a cross — it should carry the same intent as your power shots.</li>
+              <li>Snap the fist at full extension with real speed, then follow immediately with a straight right on the same line.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="skill-power-jab-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-power-jab-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min, stay tall</span></label></li>
+              <li data-id="skill-power-jab-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, jab only, no other punches</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-power-jab-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-power-jab-r2-0"><label><input type="checkbox"><span>Heavy bag: power jab only, 3 x 2 min — every jab thrown like it's meant to hurt, not just land</span></label></li>
+              <li data-id="skill-power-jab-r2-1"><label><input type="checkbox"><span>Power jab → straight right, 4 x 3 min — same line, no wasted motion between punches</span></label></li>
+              <li data-id="skill-power-jab-r2-2"><label><input type="checkbox"><span>Shadow boxing: alternate one power jab, one touch jab, 3 x 2 min — learn to feel the difference in your own hips</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-power-jab-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-power-jab-r3-0"><label><input type="checkbox"><span>Sprints — 6 x 20m</span></label></li>
+              <li data-id="skill-power-jab-r3-1"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill 2 -->
+    <div class="skill-card" data-skill-id="skill-check-hook">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">KRONK DEFENSE · TRICK</span>
+          <span class="skill-name">The Check Hook</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">When an opponent surges forward, most fighters retreat straight back — exactly what an aggressive fighter wants, since it keeps them in a straight line to chase. The check hook does the opposite: instead of retreating, you pivot off the lead foot and throw a hook as they step in, using their own momentum against them while you land on an angle they never saw coming.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>As the opponent steps forward, pivot your lead foot roughly 90° rather than stepping backward.</li>
+              <li>Rear foot follows the pivot, landing you completely off their forward line — you end up almost beside them, not behind your old spot.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Throw the lead hook AS you pivot, not before or after — the hook and the foot pivot happen on the same beat.</li>
+              <li>Keep the rear hand glued to your chin through the whole movement; you're moving past their power hand, not away from it.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="skill-check-hook-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-check-hook-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min, add a pivot every 10th skip</span></label></li>
+              <li data-id="skill-check-hook-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, footwork/pivot only, no punches</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-check-hook-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-check-hook-r2-0"><label><input type="checkbox"><span>Shadow boxing: imagine an opponent stepping in, pivot and hook on the spot — 4 x 2 min</span></label></li>
+              <li data-id="skill-check-hook-r2-1"><label><input type="checkbox"><span>Heavy bag: push the bag to swing toward you, time your pivot-hook as it returns — 3 x 2 min</span></label></li>
+              <li data-id="skill-check-hook-r2-2"><label><input type="checkbox"><span>Footwork only: drill the 90° pivot with no punch until it's automatic — 5 min</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-check-hook-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-check-hook-r3-0"><label><input type="checkbox"><span>Lateral bounds — 3 x 8 each side</span></label></li>
+              <li data-id="skill-check-hook-r3-1"><label><input type="checkbox"><span>Russian twists — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill 3 -->
+    <div class="skill-card" data-skill-id="skill-gman-hook">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">GERALD McCLELLAN · KRONK</span>
+          <span class="skill-name">The G-Man Hook</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Gerald McClellan's left hook was one of the most feared single punches the Kronk gym ever produced — a short, violent shot built from technique and timing as much as raw power, capable of changing a fight in an instant. The lesson isn't "swing harder," it's "transfer cleaner."</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Same base stance — the hook starts in your back foot's toes, pivoting the same direction as the punch.</li>
+              <li>Weight transfers fully onto the front foot as the hook lands. Don't leave it split between both feet — that's where the power leaks out.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Keep the hook short — elbow at roughly 90°, fist traveling in a tight arc, not a wide swing.</li>
+              <li>Power comes from hip and shoulder rotation snapping through; the arm is along for the ride. Rear hand stays at the chin the entire time.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="skill-gman-hook-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-gman-hook-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="skill-gman-hook-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, hook rehearsal only, no bag</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-gman-hook-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-gman-hook-r2-0"><label><input type="checkbox"><span>Heavy bag: hook only, both feet planted, full hip rotation — 4 x 2 min</span></label></li>
+              <li data-id="skill-gman-hook-r2-1"><label><input type="checkbox"><span>Jab-cross-hook, 4 x 3 min — focus on the weight transfer onto the front foot as the hook lands</span></label></li>
+              <li data-id="skill-gman-hook-r2-2"><label><input type="checkbox"><span>Bag work on a trigger, not a count, 3 x 2 min — react and hook the instant you decide to</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-gman-hook-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-gman-hook-r3-0"><label><input type="checkbox"><span>Med ball rotational slams — 3 x 10</span></label></li>
+              <li data-id="skill-gman-hook-r3-1"><label><input type="checkbox"><span>Sit-ups — 3 x 25</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill 4 -->
+    <div class="skill-card" data-skill-id="skill-shovel-hook">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">KRONK FINISHER · BODY ATTACK</span>
+          <span class="skill-name">The Shovel Hook</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">A shovel hook sits between a hook and an uppercut — a short, compact punch thrown at roughly a 45° angle into the body or chin. It's most effective as a surprise, landed after the opponent's eyes have been pulled upstairs by a jab and cross. Set it up right and it's one of the cleanest ways to finish a round.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Bend the knees slightly to drop your level before throwing, then drive upward through the legs as you release — power comes from underneath, not from reaching down with the arm.</li>
+              <li>Rear foot pivots slightly inward as you throw, same as a hook.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Set it up behind a jab-cross — by the third punch their eyes are upstairs, not guarding the body.</li>
+              <li>Throw at a 45° angle, scooping upward and across at once. Aim for the liver, or the chin if the body's too well covered.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="skill-shovel-hook-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-shovel-hook-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="skill-shovel-hook-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, knee-bend rehearsal only</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-shovel-hook-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">23 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-shovel-hook-r2-0"><label><input type="checkbox"><span>Heavy bag: jab-cross-shovel hook, 5 x 3 min — same three punches until the timing feels automatic</span></label></li>
+              <li data-id="skill-shovel-hook-r2-1"><label><input type="checkbox"><span>Double jab-overhand-shovel hook, 3 x 3 min — the overhand loads the same downward motion</span></label></li>
+              <li data-id="skill-shovel-hook-r2-2"><label><input type="checkbox"><span>Isolated shovel hooks, 3 x 2 min — focus on leg drive, not the arm</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-shovel-hook-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-shovel-hook-r3-0"><label><input type="checkbox"><span>Squat jumps — 3 x 10</span></label></li>
+              <li data-id="skill-shovel-hook-r3-1"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill 5 -->
+    <div class="skill-card" data-skill-id="skill-kenty-flurry">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">HILMER KENTY · KRONK ORIGINAL</span>
+          <span class="skill-name">The Flurry Jab</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Hilmer Kenty was the first world champion to come out of the Kronk gym, and he got there on a jab thrown in fast, repeated bursts rather than single shots — overwhelming opponents with volume and rhythm before they could find their own range.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Stay light and bouncy rather than planted — this is a volume technique, your feet need to keep resetting between jabs.</li>
+              <li>Small forward steps with each jab in the burst, not one big step. Rapid small adjustments, not a lunge.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Throw 3–4 jabs in a fast burst rather than one at a time — the first finds range, the rest overwhelm.</li>
+              <li>Keep every jab full speed. Rear hand never drops during the flurry, even though it's tempting to load it for a finisher.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="skill-kenty-flurry-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-kenty-flurry-r1-0"><label><input type="checkbox"><span>Speed bag — 2 x 2 min, build the rhythm</span></label></li>
+              <li data-id="skill-kenty-flurry-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, light bouncy footwork only</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-kenty-flurry-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">22 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-kenty-flurry-r2-0"><label><input type="checkbox"><span>Speed bag, 4 x 2 min — training the rhythm and hand speed this technique depends on</span></label></li>
+              <li data-id="skill-kenty-flurry-r2-1"><label><input type="checkbox"><span>Heavy bag: 3–4 jab flurries, 5 x 2 min, resetting stance between each burst</span></label></li>
+              <li data-id="skill-kenty-flurry-r2-2"><label><input type="checkbox"><span>Shadow boxing: flurry into a single finishing cross, 4 x 2 min</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-kenty-flurry-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">6 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-kenty-flurry-r3-0"><label><input type="checkbox"><span>Jump rope, fast pace — 2 x 2 min</span></label></li>
+              <li data-id="skill-kenty-flurry-r3-1"><label><input type="checkbox"><span>Sit-ups — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill 6 -->
+    <div class="skill-card" data-skill-id="skill-pull-counter">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">KRONK COUNTER · TRICK</span>
+          <span class="skill-name">The Pull-Counter Right</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Rather than blocking or slipping an incoming jab, the pull-counter uses a slight backward lean from the waist to let the punch fall just short — then answers immediately with a straight right while the opponent is still extended and out of position to defend.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Weight shifts onto the back foot as you pull your head back, but keep both feet on the ground — this is a lean, not a retreat.</li>
+              <li>Stay ready to drive forward off the back foot the instant you counter; the pull only works if the answer comes back fast.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Pull back just enough for the jab to miss by an inch or two — too far costs you the range to counter effectively.</li>
+              <li>Fire the straight right the moment their arm is fully extended. Lead hand stays up near your face the whole time.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="skill-pull-counter-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-pull-counter-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="skill-pull-counter-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, lean-back rehearsal only</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-pull-counter-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">19 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-pull-counter-r2-0"><label><input type="checkbox"><span>Shadow boxing: imagine a jab, pull, counter — 4 x 2 min, counter immediately after the pull, not after a pause</span></label></li>
+              <li data-id="skill-pull-counter-r2-1"><label><input type="checkbox"><span>Double-end bag, 4 x 2 min — its unpredictable rebound simulates a real incoming jab</span></label></li>
+              <li data-id="skill-pull-counter-r2-2"><label><input type="checkbox"><span>Mirror work, 3 min — confirm the lean comes from the waist, not a full step back</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="skill-pull-counter-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="skill-pull-counter-r3-0"><label><input type="checkbox"><span>Battle ropes — 3 x 30 sec</span></label></li>
+              <li data-id="skill-pull-counter-r3-1"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  </main>
+</div>
+<!-- ===== END FOLDER: KRONK ===== -->
+
+<!-- ======================================================= -->
+<!-- FOLDER: SUGAR RAY LEONARD                                -->
+<!-- ======================================================= -->
+<div class="folder-panel" data-folder="sugarray">
+  <div class="wrap">
+
+    <span class="bout-tag">FOLDER 2 — SUGAR RAY</span>
+    <div class="technique-header">
+      <h2>Sugar Ray Leonard</h2>
+      <p class="credit">Five-Division World Champion · Boxer-Puncher · One of the Four Kings</p>
+    </div>
+    <p class="technique-intro">Sugar Ray Leonard built a career on a simple principle: <b>he never let a fight stay one thing.</b> Against Roberto Duran the first time, he tried to box and got bullied. In the rematch, he danced and clowned and made Duran quit. Against Thomas Hearns, he fell behind on the cards through twelve rounds of being outboxed — then in round thirteen Angelo Dundee told him he was blowing it, and Leonard walked through Hearns in thirteen and stopped him in fourteen. Against Marvin Hagler, he moved for eleven rounds, traded for one, then moved again. Every time the game changed against him, he had another gear. That adaptability is the whole Leonard curriculum.</p>
+    <p class="technique-intro" style="margin-top:10px;">Underneath the showmanship — the bolo punch, the Ali Shuffle, the taunting — was real, hard technique. <b>His jab did more work than any other punch in his arsenal</b>, used at least four different ways depending on what the moment needed. His footwork wasn't just movement; it was his offense, setting angles before a punch ever landed. He would slide in closer with two or three quick movements in his opponent's direction to force a defensive posture — or cause them to fire a shot he was prepared to slip and counter. Everything in this folder connects back to those two things: the jab and the feet that make it work.</p>
+
+    <div class="code-row">
+      <div class="code-tag"><b>01 · THE JAB IS YOUR EVERYTHING</b><span>It controls range, sets up power, and scores on its own.</span></div>
+      <div class="code-tag"><b>02 · FEET BEFORE FISTS</b><span>Get your feet in the right place before you throw anything.</span></div>
+      <div class="code-tag"><b>03 · CHANGE THE GAME</b><span>If what you're doing isn't working, do something else — right now.</span></div>
+      <div class="code-tag"><b>04 · SHOWTIME IS INTENTIONAL</b><span>Every trick Leonard threw had a tactical purpose behind it.</span></div>
+    </div>
+
+    <h3 class="workout-title">BASE STANCE — THE BOXER-PUNCHER</h3>
+    <div class="stance-diagrams">
+      <div class="diagram-card">
+        <h4>FOOT POSITION — TOP VIEW</h4>
+        <svg viewBox="0 0 220 220" class="stance-svg" role="img" aria-label="Sugar Ray Leonard stance foot position, viewed from above">
+          <line x1="110" y1="28" x2="110" y2="10" class="stroke-muted" stroke-width="1.5"/>
+          <polygon points="110,4 104,14 116,14" class="fill-muted-dim"/>
+          <text x="110" y="42" text-anchor="middle" class="svg-lbl fill-muted" font-size="9">OPPONENT</text>
+          <line x1="110" y1="50" x2="110" y2="198" class="stroke-muted" stroke-width="1" stroke-dasharray="3,3"/>
+          <ellipse cx="88" cy="95" rx="14" ry="24" class="fill-none stroke-gold" stroke-width="2" stroke-dasharray="1,2" transform="rotate(-6 88 95)"/>
+          <text x="88" y="99" text-anchor="middle" class="svg-lbl fill-gold" font-size="11">L</text>
+          <ellipse cx="135" cy="140" rx="13" ry="22" class="fill-none stroke-red" stroke-width="2" stroke-dasharray="1,2" transform="rotate(45 135 140)"/>
+          <text x="135" y="144" text-anchor="middle" class="svg-lbl fill-red" font-size="11">R</text>
+          <text x="88" y="128" text-anchor="middle" class="svg-lbl fill-gold" font-size="9">50%</text>
+          <text x="135" y="172" text-anchor="middle" class="svg-lbl fill-red" font-size="9">50%</text>
+          <text x="110" y="210" text-anchor="middle" class="svg-lbl fill-muted" font-size="8">EVEN WEIGHT — ALWAYS RESETTING</text>
+        </svg>
+      </div>
+      <div class="diagram-card">
+        <h4>GUARD — FRONT VIEW</h4>
+        <svg viewBox="0 0 220 230" class="stance-svg" role="img" aria-label="Sugar Ray Leonard guard, hand and chin position">
+          <path d="M75,68 L145,68 L156,222 L64,222 Z" class="fill-none stroke-muted" stroke-width="1.5"/>
+          <circle cx="110" cy="40" r="20" class="fill-none stroke-cream" stroke-width="2"/>
+          <line x1="110" y1="58" x2="98" y2="68" class="stroke-gold" stroke-width="1.5"/>
+          <line x1="76" y1="80" x2="96" y2="69" class="stroke-muted" stroke-width="1" stroke-dasharray="2,2"/>
+          <text x="6" y="78" class="svg-lbl fill-gold" font-size="9">CHIN</text>
+          <text x="6" y="89" class="svg-lbl fill-gold" font-size="9">TUCKED</text>
+          <circle cx="138" cy="66" r="12" class="fill-red"/>
+          <text x="160" y="58" class="svg-lbl fill-red" font-size="9">REAR</text>
+          <text x="160" y="69" class="svg-lbl fill-red" font-size="9">HAND</text>
+          <circle cx="78" cy="72" r="12" class="fill-gold"/>
+          <text x="8" y="64" class="svg-lbl fill-gold" font-size="9">LEAD</text>
+          <text x="8" y="75" class="svg-lbl fill-gold" font-size="9">HAND</text>
+          <text x="4" y="100" class="svg-lbl fill-muted" font-size="8">(high &amp;</text>
+          <text x="4" y="110" class="svg-lbl fill-muted" font-size="8">active)</text>
+          <line x1="143" y1="76" x2="148" y2="128" class="stroke-red" stroke-width="1.5" stroke-dasharray="2,2"/>
+          <text x="151" y="135" class="svg-lbl fill-muted" font-size="8">elbow in</text>
+        </svg>
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-col">
+        <h3>FEET</h3>
+        <ul>
+          <li>Orthodox, shoulder-width — but always live. Leonard almost never planted for more than two consecutive punches. His feet reset between every combination.</li>
+          <li>Weight stays close to 50/50, which gives him the ability to spring forward into power mode OR retreat into pure boxing without needing to shift his base first. Duran beat him the first time partly by forcing him to fight flat-footed against the ropes.</li>
+          <li>Knees slightly bent, never locked. His lead knee had a constant, very subtle flex — you can see it in footage. It's what lets him change direction instantly.</li>
+          <li>He always moves his lead foot first — whether stepping in, out, or laterally. The back foot follows, never crosses.</li>
+        </ul>
+      </div>
+      <div class="spec-col">
+        <h3>HANDS</h3>
+        <ul>
+          <li>High guard, both hands near the face, but the lead hand is always in motion — floating, feinting, measuring. Never glued. It becomes the jab, the bolo setup, the body feint.</li>
+          <li>Rear hand locked at the right cheekbone, elbow in tight to the ribs. Stays there until it's time to fire — then it explodes, then it comes straight back. No lingering.</li>
+          <li>Chin is tucked behind the lead shoulder, not just dropped. Watch his fights — his head is almost always slightly angled so the lead shoulder is between his chin and his opponent.</li>
+          <li>Eyes stay up and tracking the center of his opponent's chest, not their hands. Watching hands is a beginner's habit. Chest movement tells you what's coming before the gloves move.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ====================== JAB MASTERCLASS ====================== -->
+    <h3 class="workout-title" style="margin-top:30px;">JAB MASTERCLASS + FOOTWORK</h3>
+    <p class="technique-intro" style="margin-bottom:18px;">Leonard almost always used the jab as the initiator for any attack — but he varied the level of the target to confuse opponents. Below are the five versions of his jab, each one tied to specific footwork. These aren't just punch variations — the feet are what make each one work. Drill each version separately before mixing them.</p>
+
+    <!-- Jab 1 -->
+    <div class="skill-card" data-skill-id="sr-jab-stepin">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">JAB 1 OF 5 · FOOTWORK</span>
+          <span class="skill-name">The Step-In Jab</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">The foundation. Leonard's default jab — thrown as he steps his lead foot slightly forward to close distance, creating momentum that adds snap without needing extra arm strength. Every other jab variation is a modification of this one.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Lead foot steps forward 3–4 inches at the same moment the jab leaves your hand. Not before, not after — together.</li>
+              <li>Back foot immediately follows, sliding up to restore stance width. If your back foot stays behind, your weight gets dumped forward and you're vulnerable.</li>
+              <li>After the jab lands: immediately circle left or reset — never stand directly in front of where the punch landed.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Lead shoulder rotates forward, fist extends straight from the cheekbone to the target. Thumb turns down at full extension — your palm should face the floor when the punch connects.</li>
+              <li>Snap back to your guard the instant the fist makes contact. The power is in the snap, not a push.</li>
+              <li>Rear hand does not move at all during the jab. It stays at the cheekbone the whole time.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-jab-stepin-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-si-r1-0"><label><input type="checkbox"><span>Jump rope — 3 x 2 min</span></label></li>
+              <li data-id="sr-jab-si-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, footwork only, zero punches</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-stepin-r2">
+            <div class="round-card-head"><span><span class="round-label">FOOT + JAB SYNC</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-si-r2-0"><label><input type="checkbox"><span>Slow drill: step in, throw jab — stop and check your back foot followed — 3 min, no speed</span></label></li>
+              <li data-id="sr-jab-si-r2-1"><label><input type="checkbox"><span>Shadow boxing: step-in jab only, full speed — 4 x 2 min, circle left after every single rep</span></label></li>
+              <li data-id="sr-jab-si-r2-2"><label><input type="checkbox"><span>Heavy bag: step-in jab, 5 x 2 min — touch the bag and immediately move, never stand in front</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-stepin-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-si-r3-0"><label><input type="checkbox"><span>Sprints — 6 x 20m, drive off the lead foot same as the jab step</span></label></li>
+              <li data-id="sr-jab-si-r3-1"><label><input type="checkbox"><span>Sit-ups — 3 x 25</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jab 2 -->
+    <div class="skill-card" data-skill-id="sr-jab-triple">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">JAB 2 OF 5 · RHYTHM BREAKER</span>
+          <span class="skill-name">The Triple Jab</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Leonard didn't throw the jab once and wait — he fired it in fast, back-to-back bursts. Three jabs in a row overwhelm an opponent's guard before they can reset, and the third jab often found a gap the first two created. Used to set up the right hand or a body attack.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>First jab: small step in with the lead foot. Second jab: lead foot resets, another tiny advance. Third jab: same — three micro-steps forward, not one big lunge.</li>
+              <li>After the third jab, your feet should be in a slightly closer stance than where you started. That's intentional — you're already in range for the right hand.</li>
+              <li>Back foot keeps pace with each advance. If it lags, you've spread your feet too wide and lost your power base.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Each jab snaps back fully before the next one goes out — don't leave your arm extended and flick from there, that's arm punching with no power.</li>
+              <li>Vary the speed within the three: throw the first at 70%, the second at 80%, the third at full — so the last one has genuine pop.</li>
+              <li>Rear hand stays absolutely still during all three jabs. It's loading, not resting.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-jab-triple-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-tr-r1-0"><label><input type="checkbox"><span>Jump rope — 3 x 2 min, stay light</span></label></li>
+              <li data-id="sr-jab-tr-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, single jab only to feel the snap</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-triple-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">22 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-tr-r2-0"><label><input type="checkbox"><span>Shadow boxing: triple jab only, 4 x 2 min — confirm each jab snaps back before the next goes out</span></label></li>
+              <li data-id="sr-jab-tr-r2-1"><label><input type="checkbox"><span>Heavy bag: triple jab, 4 x 2 min — feel the three micro-steps pushing you closer with each punch</span></label></li>
+              <li data-id="sr-jab-tr-r2-2"><label><input type="checkbox"><span>Heavy bag: triple jab → right cross, 4 x 3 min — the right hand comes out of the range the three jabs created</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-triple-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-tr-r3-0"><label><input type="checkbox"><span>Speed bag — 3 x 2 min, build the triple rhythm</span></label></li>
+              <li data-id="sr-jab-tr-r3-1"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jab 3 -->
+    <div class="skill-card" data-skill-id="sr-jab-circling">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">JAB 3 OF 5 · ANGLE JAB</span>
+          <span class="skill-name">The Circling Jab</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Leonard would launch the body jab usually as he circled opponents — because of his speed, he was able to control the distance in which he fought. The circling jab isn't just a punch thrown while moving — it's a punch whose angle changes because of where your feet are. You jab from a position your opponent didn't expect you to be in.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Circle left continuously — push off the right foot, step the left foot to the left, right foot follows. Keep moving in a smooth arc, not a stop-start shuffle.</li>
+              <li>Throw the jab at the moment your lead foot plants during the circle. Your body's rotation as you circle adds angle to the punch automatically — you're not punching straight ahead, you're punching from a slightly different line each time.</li>
+              <li>After the jab: continue circling in the same direction, don't stop and stand. The movement before AND after the punch is what keeps you safe.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>The jab fires on the same line as always — straight from the lead shoulder to the target. But because you're sideways to your opponent's line of attack, the angle of impact changes.</li>
+              <li>Keep the rear hand high while circling — if you drop it to "help" you move, you're exposed the instant the jab lands.</li>
+              <li>Short, sharp snap — circling jabs are not looping or wide. They're the same compact punch thrown from a moving base.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-jab-circ-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-circ-r1-0"><label><input type="checkbox"><span>Jump rope — 3 x 2 min, lateral shuffle steps during rope</span></label></li>
+              <li data-id="sr-jab-circ-r1-1"><label><input type="checkbox"><span>Circle drill — 2 min: circle left continuously around an imaginary opponent, no punches, just feel the movement</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-circ-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">21 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-circ-r2-0"><label><input type="checkbox"><span>Shadow boxing: circle left, jab as your lead foot plants, keep circling after — 4 x 2 min, don't stop between jabs</span></label></li>
+              <li data-id="sr-jab-circ-r2-1"><label><input type="checkbox"><span>Heavy bag: circle the bag, jab from different angles, 5 x 2 min — never stand in the same spot twice</span></label></li>
+              <li data-id="sr-jab-circ-r2-2"><label><input type="checkbox"><span>Heavy bag: circling jab → right cross from the new angle, 3 x 3 min — the angle your feet created opens up the right hand</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-circ-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-circ-r3-0"><label><input type="checkbox"><span>Lateral bounds — 3 x 8 each side</span></label></li>
+              <li data-id="sr-jab-circ-r3-1"><label><input type="checkbox"><span>Russian twists — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jab 4 -->
+    <div class="skill-card" data-skill-id="sr-jab-footfeint">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">JAB 4 OF 5 · DECEPTION</span>
+          <span class="skill-name">The Foot-Feint Jab Over Top</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Leonard would fake to the body with the same foot movement he used for the real body jab — and then instead unleash the right hand over the top, often catching his target as they blocked the midsection. The foot feint is the whole move. Everything else reacts to it.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Dip your knees slightly and step your lead foot forward exactly as you would for the real body jab. This is the feint — your opponent can't tell which punch is coming from the foot movement alone.</li>
+              <li>Instead of staying low, immediately straighten back up as you throw the real punch upstairs. The leg drive from coming back up actually powers the jab or right hand over the top.</li>
+              <li>Keep the foot movement small and quick — a big dramatic dip telegraphs that you're setting something up.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>During the feint: lead hand drops slightly toward the body line — not a full jab, just enough movement to get the reaction you need.</li>
+              <li>The real punch comes over the top as the opponent's guard drops to cover the fake body shot. Fire the right hand or a sharp jab straight to the chin.</li>
+              <li>Rear hand stays tight — the whole point is a quick deception and a clean counter. Don't load up.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-jab-ff-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-ff-r1-0"><label><input type="checkbox"><span>Jump rope — 3 x 2 min</span></label></li>
+              <li data-id="sr-jab-ff-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, knee-dip rehearsal only, no punches</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-ff-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">21 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-ff-r2-0"><label><input type="checkbox"><span>Shadow boxing: feint to the body (dip the knees + drop the lead hand), then fire the right hand over the top — 4 x 2 min</span></label></li>
+              <li data-id="sr-jab-ff-r2-1"><label><input type="checkbox"><span>Mirror work: confirm your knee dip looks exactly like the real body jab — 3 min</span></label></li>
+              <li data-id="sr-jab-ff-r2-2"><label><input type="checkbox"><span>Heavy bag: body feint → right hand over top, 4 x 3 min — imagine the bag covering its midsection as you come over</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-ff-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-ff-r3-0"><label><input type="checkbox"><span>Squat jumps — 3 x 10 (trains the leg drive behind the deception)</span></label></li>
+              <li data-id="sr-jab-ff-r3-1"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jab 5 -->
+    <div class="skill-card" data-skill-id="sr-jab-pullcounter">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">JAB 5 OF 5 · DEFENSIVE JAB</span>
+          <span class="skill-name">The Pull-Back Counter Jab</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Most fighters think of the jab as an attacking punch. Leonard also used it as a counter — pulling his head back just enough to let an incoming jab miss by an inch, then snapping his own jab back along exactly the same line before the opponent could recover. The incoming punch creates the opening; the pull-back jab fills it.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Weight shifts onto the back foot during the pull — not a step back, just a lean. You need both feet on the floor to fire back immediately.</li>
+              <li>The moment your own jab goes out, weight shifts forward again onto the front foot to add power to the counter.</li>
+              <li>Don't shuffle backward. The pull is from the waist and head only. If your feet move, you've taken yourself out of range to counter.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Lean back just enough — maybe 3–4 inches — for the incoming punch to miss your chin. Too far and you're out of range to counter. Too little and you eat it.</li>
+              <li>Fire your jab the instant their arm is at full extension. That's when they're most committed and least able to defend. Your jab goes straight to their chin.</li>
+              <li>Rear hand stays at your cheekbone the whole time — don't drop it to help yourself lean back.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-jab-pc-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-pc-r1-0"><label><input type="checkbox"><span>Jump rope — 3 x 2 min</span></label></li>
+              <li data-id="sr-jab-pc-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, pull-back lean only, no punches, feel the weight shift</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-pc-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">21 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-pc-r2-0"><label><input type="checkbox"><span>Shadow boxing: imagine an incoming jab, lean back, fire your counter jab — 4 x 2 min, counter IMMEDIATELY, no pause</span></label></li>
+              <li data-id="sr-jab-pc-r2-1"><label><input type="checkbox"><span>Double-end bag: let it swing toward you, lean back, counter jab as it's fully extended — 4 x 2 min</span></label></li>
+              <li data-id="sr-jab-pc-r2-2"><label><input type="checkbox"><span>Mirror work: confirm the lean is from the waist only and your feet never move — 3 min</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-jab-pc-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-jab-pc-r3-0"><label><input type="checkbox"><span>Battle ropes — 3 x 30 sec</span></label></li>
+              <li data-id="sr-jab-pc-r3-1"><label><input type="checkbox"><span>Sit-ups — 3 x 25</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Common Jab Mistakes -->
+    <div class="focus-box" style="margin:24px 0;">
+      <h3>JAB TECHNIQUE TIPS — FIX THESE FIRST</h3>
+      <ul style="margin:0; padding:0; list-style:none;">
+        <li style="font-size:13.5px; color:#d9d0c0; padding:8px 0; border-top:1px dashed var(--line);">⚠ <b style="color:var(--gold-bright);">Dropping the rear hand</b> — your rear hand must not move when you jab. If it drops, you're open for a counter right hand. Drill with your rear fist touching your cheek.</li>
+        <li style="font-size:13.5px; color:#d9d0c0; padding:8px 0; border-top:1px dashed var(--line);">⚠ <b style="color:var(--gold-bright);">Arm punching</b> — if the power is coming only from your arm and shoulder, the jab has no snap. Your lead shoulder needs to rotate forward on every jab. Feel the push from the ball of your back foot.</li>
+        <li style="font-size:13.5px; color:#d9d0c0; padding:8px 0; border-top:1px dashed var(--line);">⚠ <b style="color:var(--gold-bright);">Not snapping back</b> — leaving your arm extended after the jab is called arm-punching and telegraphs your next punch. The jab returns to your face as fast as it left.</li>
+        <li style="font-size:13.5px; color:#d9d0c0; padding:8px 0; border-top:1px dashed var(--line);">⚠ <b style="color:var(--gold-bright);">Standing flat after the jab</b> — every jab should end with your feet moving. Either circle left, reset your angle, or set up your next punch while moving. Standing still is a target.</li>
+        <li style="font-size:13.5px; color:#d9d0c0; padding:8px 0; border-top:1px dashed var(--line);">⚠ <b style="color:var(--gold-bright);">Only jabbing to the head</b> — Leonard used the body jab constantly to drain energy and pull the guard down. If you only go upstairs, your opponent only guards one place.</li>
+        <li style="font-size:13.5px; color:#d9d0c0; padding:8px 0; border-top:1px dashed var(--line);">⚠ <b style="color:var(--gold-bright);">Telegraphing with the shoulder</b> — if your lead shoulder dips or rises before the jab goes out, a sharp opponent will time it. The jab should erupt from a neutral shoulder position.</li>
+      </ul>
+    </div>
+
+    <h3 class="workout-title">SKILL VAULT — PICK &amp; MASTER</h3>
+
+    <!-- SR Skill 1 (existing) -->
+    <div class="skill-card" data-skill-id="sr-bolo">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">SUGAR RAY LEONARD · MISDIRECTION</span>
+          <span class="skill-name">The Bolo Punch</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Leonard's most famous trick wasn't really about power — it was theater with a purpose. He'd wind his rear hand up in a wide circular motion as if loading a huge looping shot, pulling the opponent's eyes and guard toward that hand. Then he'd snap a quick, ordinary jab in with the other hand, into a face that wasn't ready for it. He used exactly this against Roberto Duran in their 1980 rematch.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Stay in your normal stance through the whole motion — the wind-up is a hand trick, not a footwork commitment.</li>
+              <li>Weight stays centered; you need to fire the real punch the instant the wind-up has done its job.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Wind the rear hand up and back in a slow, exaggerated circular motion — the bigger the wind-up, the more attention it pulls.</li>
+              <li>Snap the jab (or whatever punch you choose) with the OTHER hand the instant their eyes or guard shift toward the winding hand. Timing, not power, makes this work.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-bolo-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-bolo-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="sr-bolo-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, bolo wind-up rehearsal only, no real punch yet</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-bolo-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">19 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-bolo-r2-0"><label><input type="checkbox"><span>Shadow boxing: bolo wind-up into a real jab, 4 x 2 min — exaggerate the wind-up until it feels theatrical</span></label></li>
+              <li data-id="sr-bolo-r2-1"><label><input type="checkbox"><span>Heavy bag: same drill, 4 x 2 min — the jab lands clean while the bag "watches" your rear hand</span></label></li>
+              <li data-id="sr-bolo-r2-2"><label><input type="checkbox"><span>Mirror work, 3 min — confirm your real punching hand isn't tensing or telegraphing while the other winds up</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-bolo-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">6 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-bolo-r3-0"><label><input type="checkbox"><span>Footwork ladder / in-out drill — 3 min</span></label></li>
+              <li data-id="sr-bolo-r3-1"><label><input type="checkbox"><span>Sit-ups — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SR Skill 2 -->
+    <div class="skill-card" data-skill-id="sr-bodyjab">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">SUGAR RAY LEONARD · RANGE CONTROL</span>
+          <span class="skill-name">The Body Jab Level-Change</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Leonard rarely jabbed to one spot. He'd work the head with quick jabs to keep an opponent's hands up high, then suddenly drop the same jab into the midsection — scoring points and draining energy at once, since body shots cost more stamina to absorb than anything upstairs.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Head jab: normal stance, weight even.</li>
+              <li>Body jab: bend both knees to drop your whole level — don't just bend at the waist. Staying upright while reaching down weakens the punch and exposes your chin.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Throw 2–3 jabs upstairs first to get the opponent's hands and eyes high.</li>
+              <li>Drop levels with your legs, drive the jab into the midsection, then pop immediately back up. Rear hand stays up the entire time — you're most exposed while bent down.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-bodyjab-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-bodyjab-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="sr-bodyjab-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, knee-bend rehearsal only</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-bodyjab-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-bodyjab-r2-0"><label><input type="checkbox"><span>Heavy bag: 3 jabs to the head, 1 to the body, repeat — 4 x 3 min, focus on a smooth level change</span></label></li>
+              <li data-id="sr-bodyjab-r2-1"><label><input type="checkbox"><span>Shadow boxing: practice the knee-bend alone, no punches, until dropping and rising feels effortless — 3 min</span></label></li>
+              <li data-id="sr-bodyjab-r2-2"><label><input type="checkbox"><span>Heavy bag: body jab only, 3 x 2 min, emphasis on popping back up immediately after each one</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-bodyjab-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-bodyjab-r3-0"><label><input type="checkbox"><span>Squat jumps — 3 x 10</span></label></li>
+              <li data-id="sr-bodyjab-r3-1"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SR Skill 3 -->
+    <div class="skill-card" data-skill-id="sr-switch">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">SUGAR RAY LEONARD · ADAPTABILITY</span>
+          <span class="skill-name">The Boxer-Puncher Switch</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Leonard's greatest weapon may have been his ability to change what kind of fighter he was mid-fight. Against Thomas Hearns, he spent early rounds boxing at range and falling behind on the cards — then switched into pressure mode, closing distance and hurting Hearns with a left hook in round six to turn the entire fight around. The skill isn't one punch, it's recognizing when pure boxing isn't working and having a second gear ready.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Boxing mode: stay light, circling, out of range, feet always resetting.</li>
+              <li>Power mode: plant heavier, square up slightly more to generate force — trading a step of range for the ability to load a real punch.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Lead with a jab to close range safely, then immediately follow with a committed hook or cross — a full mode change in rhythm and intent, not a single trick punch.</li>
+              <li>Once in power mode, keep the rear hand tighter to the chin than usual — you're trading some defense for offense.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-switch-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-switch-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="sr-switch-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, alternate light footwork and heavier planted steps</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-switch-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-switch-r2-0"><label><input type="checkbox"><span>Shadow boxing: 2 min boxing mode (footwork, jabs only), then 1 min power mode (committed combinations) — repeat 4x, practicing the transition itself</span></label></li>
+              <li data-id="sr-switch-r2-1"><label><input type="checkbox"><span>Heavy bag: same structure, 4 x 3 min rounds split 2:1 between boxing and power</span></label></li>
+              <li data-id="sr-switch-r2-2"><label><input type="checkbox"><span>One extra round, your choice of bag or shadow — push the switch until it's instinct, not a decision</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-switch-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-switch-r3-0"><label><input type="checkbox"><span>Sprints — 6 x 20m (this technique costs extra energy — build the engine for it)</span></label></li>
+              <li data-id="sr-switch-r3-1"><label><input type="checkbox"><span>Russian twists — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SR Skill 4 -->
+    <div class="skill-card" data-skill-id="sr-lefthook">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">SUGAR RAY LEONARD · FIGHT-ENDER</span>
+          <span class="skill-name">The Finishing Left Hook</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Leonard called his left hook against Dave "Boy" Green the hardest single punch he ever threw — a single shot that ended the fight in the fourth round. It wasn't a wild swing; it came off the same fast hands and footwork as everything else in his arsenal, just committed fully instead of held back.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Same base stance, but as you commit, pivot the rear foot inward and drive your weight fully onto the front foot — this is thrown with total commitment, not measured speed.</li>
+              <li>Stay square enough that your hips can rotate fully; too bladed a stance robs you of the rotation.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Set it up off a jab or a feint — it works because the opponent isn't expecting full commitment from a fighter known for speed.</li>
+              <li>Elbow bent around 90°, fist travels in a short, tight arc. Rear hand glued to the chin through the whole punch — full commitment means zero margin for a dropped guard.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-lefthook-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-lefthook-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="sr-lefthook-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, hook rehearsal only</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-lefthook-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-lefthook-r2-0"><label><input type="checkbox"><span>Heavy bag: jab → finishing left hook, 5 x 3 min, full commitment on every rep</span></label></li>
+              <li data-id="sr-lefthook-r2-1"><label><input type="checkbox"><span>Shadow boxing: feint → finishing hook, 4 x 2 min — practice setting it up with a fake before committing</span></label></li>
+              <li data-id="sr-lefthook-r2-2"><label><input type="checkbox"><span>Power check: every few rounds, throw one hook at 100% to remind your body what full commitment feels like</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-lefthook-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-lefthook-r3-0"><label><input type="checkbox"><span>Med ball rotational slams — 3 x 10</span></label></li>
+              <li data-id="sr-lefthook-r3-1"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SR Skill 5 -->
+    <div class="skill-card" data-skill-id="sr-flurry">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">SUGAR RAY LEONARD · ROUND-STEALER</span>
+          <span class="skill-name">The Showtime Flurry</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Late against Marvin Hagler, an exhausted Leonard found something extra — answering every one of Hagler's punches with a faster, flashier flurry of his own, landing fewer shots but winning the room and the judges with sheer output in the final rounds. A championship-rounds weapon: when you're tired and behind, volume and energy can still steal a round.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Stay in tight, controlled range — this isn't new footwork, it's maximum output from wherever you already are.</li>
+              <li>Brace through both feet for a short, intense burst rather than conserving for a longer exchange.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Throw 6–10 punches in a continuous burst, prioritizing speed and volume over individual power.</li>
+              <li>Mix head and body freely within the flurry, then reset your guard fully the instant it ends — a flurry that ends with your hands down undoes the whole point.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="sr-flurry-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-flurry-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="sr-flurry-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, light and loose</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-flurry-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">18 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-flurry-r2-0"><label><input type="checkbox"><span>Heavy bag: 8-punch flurries, 5 x 2 min, full speed for the burst then complete reset</span></label></li>
+              <li data-id="sr-flurry-r2-1"><label><input type="checkbox"><span>Shadow boxing: flurry into an immediate high guard, 4 x 1 min, focus on the clean reset after</span></label></li>
+              <li data-id="sr-flurry-r2-2"><label><input type="checkbox"><span>Do one more flurry round right now, deliberately tired — that's the actual skill, finding output when you don't feel like you have it left</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="sr-flurry-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="sr-flurry-r3-0"><label><input type="checkbox"><span>Burpees — 3 x 10</span></label></li>
+              <li data-id="sr-flurry-r3-1"><label><input type="checkbox"><span>Sit-ups — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ===== END FOLDER: SUGAR RAY ===== -->
+
+<!-- ======================================================= -->
+<!-- FOLDER: ROBERTO DURAN                                    -->
+<!-- ======================================================= -->
+<div class="folder-panel" data-folder="duran">
+  <div class="wrap">
+
+    <span class="bout-tag">FOLDER 3 — DURAN</span>
+    <div class="technique-header">
+      <h2>Roberto Duran</h2>
+      <p class="credit">"Manos de Piedra" (Hands of Stone) · Four-Division World Champion</p>
+    </div>
+    <p class="technique-intro">If Leonard's game was about avoiding a fight, Duran's was about making sure there wasn't one to avoid. He built a four-division championship career on relentless forward pressure, smothering infighting, and a body attack that broke opponents down over twelve rounds. Underneath the brawler reputation was real craft — feints that drew mistakes, footwork that cut off the ring before a punch landed, and defensive instincts sharp enough to keep him near the top for almost two decades. This folder is about closing distance and making opponents pay for being caught there.</p>
+
+    <h3 class="workout-title">BASE STANCE — THE PRESSURE FIGHTER</h3>
+    <div class="stance-diagrams">
+      <div class="diagram-card">
+        <h4>FOOT POSITION — TOP VIEW</h4>
+        <svg viewBox="0 0 220 220" class="stance-svg" role="img" aria-label="Roberto Duran stance foot position, viewed from above">
+          <line x1="110" y1="28" x2="110" y2="10" class="stroke-muted" stroke-width="1.5"/>
+          <polygon points="110,4 104,14 116,14" class="fill-muted-dim"/>
+          <text x="110" y="42" text-anchor="middle" class="svg-lbl fill-muted" font-size="9">OPPONENT</text>
+          <line x1="110" y1="50" x2="110" y2="198" class="stroke-muted" stroke-width="1" stroke-dasharray="3,3"/>
+          <ellipse cx="95" cy="110" rx="15" ry="24" class="fill-none stroke-gold" stroke-width="2.5" transform="rotate(-4 95 110)"/>
+          <text x="95" y="114" text-anchor="middle" class="svg-lbl fill-gold" font-size="11">L</text>
+          <ellipse cx="130" cy="150" rx="13" ry="22" class="fill-none stroke-red" stroke-width="2.5" transform="rotate(35 130 150)"/>
+          <text x="130" y="154" text-anchor="middle" class="svg-lbl fill-red" font-size="11">R</text>
+          <text x="95" y="142" text-anchor="middle" class="svg-lbl fill-gold" font-size="9">55%</text>
+          <text x="130" y="180" text-anchor="middle" class="svg-lbl fill-red" font-size="9">45%</text>
+          <text x="110" y="210" text-anchor="middle" class="svg-lbl fill-muted" font-size="8">COMPACT — BUILT TO ADVANCE</text>
+        </svg>
+      </div>
+      <div class="diagram-card">
+        <h4>GUARD — FRONT VIEW</h4>
+        <svg viewBox="0 0 220 230" class="stance-svg" role="img" aria-label="Roberto Duran guard, hand and chin position">
+          <path d="M75,68 L145,68 L156,222 L64,222 Z" class="fill-none stroke-muted" stroke-width="1.5"/>
+          <circle cx="110" cy="40" r="20" class="fill-none stroke-cream" stroke-width="2"/>
+          <line x1="110" y1="58" x2="100" y2="70" class="stroke-gold" stroke-width="1.5"/>
+          <line x1="76" y1="84" x2="98" y2="71" class="stroke-muted" stroke-width="1" stroke-dasharray="2,2"/>
+          <text x="6" y="80" class="svg-lbl fill-gold" font-size="9">CHIN LOW,</text>
+          <text x="6" y="91" class="svg-lbl fill-gold" font-size="9">MOVING</text>
+          <circle cx="132" cy="98" r="12" class="fill-red"/>
+          <text x="154" y="92" class="svg-lbl fill-red" font-size="9">REAR</text>
+          <text x="154" y="103" class="svg-lbl fill-red" font-size="9">HAND</text>
+          <circle cx="86" cy="100" r="12" class="fill-gold"/>
+          <text x="6" y="124" class="svg-lbl fill-gold" font-size="9">LEAD</text>
+          <text x="6" y="135" class="svg-lbl fill-gold" font-size="9">HAND</text>
+          <text x="2" y="148" class="svg-lbl fill-muted" font-size="8">(tight &amp; low)</text>
+          <line x1="138" y1="106" x2="143" y2="140" class="stroke-red" stroke-width="1.5" stroke-dasharray="2,2"/>
+          <text x="146" y="148" class="svg-lbl fill-muted" font-size="8">elbows in,</text>
+          <text x="146" y="158" class="svg-lbl fill-muted" font-size="8">close range</text>
+        </svg>
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-col">
+        <h3>FEET</h3>
+        <ul>
+          <li>Narrower, more compact stance than a typical boxer's — short, controlled steps rather than long ones, built to close distance without giving an opponent room to circle away.</li>
+          <li>Weight rides slightly forward, on the front half of both feet — built for moving in, not retreating.</li>
+          <li>Rear foot drives every forward step. You rarely back up, so the back foot is always loading the next advance, not preparing an exit.</li>
+        </ul>
+      </div>
+      <div class="spec-col">
+        <h3>HANDS</h3>
+        <ul>
+          <li>Guard sits a little tighter and lower than a pure outside boxer's — built for slipping and rolling at close range, not just blocking from distance.</li>
+          <li>Hands stay active and circling rather than static, ready to parry, smother, or control an opponent's arm the instant range closes.</li>
+          <li>Chin tucked low behind the lead shoulder, head always moving slightly — never a still target, even while pressing forward.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="workout-title">SKILL VAULT — PICK &amp; MASTER</h3>
+
+    <!-- Duran Skill 1 -->
+    <div class="skill-card" data-skill-id="rd-circlehands">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">ROBERTO DURAN · INFIGHT CONTROL</span>
+          <span class="skill-name">The Circling Hands Hold</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Instead of snapping every punch straight back to his guard, Duran would sometimes circle his hand over or under an opponent's guard and into a controlling hold — blending striking and grappling into one motion. It let him smother an opponent's offense from the inside while setting up his own follow-up shots.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Requires being already at very close range — short, controlled steps to close the gap fully first, not from outside.</li>
+              <li>Weight centered and low, knees bent. This is a balance-heavy technique; you need a stable base to control someone else's arm.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>After landing or throwing a punch, instead of retracting straight back, let that hand circle over (or under) the opponent's lead arm.</li>
+              <li>Use it to press or trap their arm for a beat, taking away their ability to punch back, while the other hand stays free for a follow-up.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="rd-circlehands-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-circlehands-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="rd-circlehands-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, close-range footwork only</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-circlehands-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">19 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-circlehands-r2-0"><label><input type="checkbox"><span>Heavy bag at close range: practice the circling motion after a jab, 5 x 2 min — focus on control, not speed</span></label></li>
+              <li data-id="rd-circlehands-r2-1"><label><input type="checkbox"><span>Shadow boxing: rehearse the hand-circling motion in isolation until it's automatic — 3 min</span></label></li>
+              <li data-id="rd-circlehands-r2-2"><label><input type="checkbox"><span>Combine: circle-control, then immediately land a body shot with the free hand — 4 x 2 min</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-circlehands-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-circlehands-r3-0"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+              <li data-id="rd-circlehands-r3-1"><label><input type="checkbox"><span>Sit-ups — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duran Skill 2 -->
+    <div class="skill-card" data-skill-id="rd-shiftonetwo">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">ROBERTO DURAN · ENTRY COMBO</span>
+          <span class="skill-name">The Shifting One-Two</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">One of Duran's favorite ways to get from the outside to the inside — a one-two where the cross doesn't travel in a straight line. It winds around the opponent's lead arm, sneaking inside their guard rather than going through it, so he's already at close range by the time the combination finishes.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Step forward with the jab as usual, but on the cross, step the rear foot further forward than normal — you're walking into range, not just punching.</li>
+              <li>By the end of the combination your feet should already be in close-range position.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Jab as the opening shot, same as always.</li>
+              <li>On the cross, let the punch curve slightly around the outside of the opponent's lead arm — aiming to finish close to or past their guard rather than through the front of it.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="rd-shiftonetwo-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-shiftonetwo-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="rd-shiftonetwo-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, step-in footwork only</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-shiftonetwo-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-shiftonetwo-r2-0"><label><input type="checkbox"><span>Shadow boxing: jab, then a deliberately curving cross that "wraps" around an imaginary lead arm — 5 x 2 min</span></label></li>
+              <li data-id="rd-shiftonetwo-r2-1"><label><input type="checkbox"><span>Heavy bag: same combo, focus on finishing with your feet already in close range — 4 x 3 min</span></label></li>
+              <li data-id="rd-shiftonetwo-r2-2"><label><input type="checkbox"><span>Follow-up: shifting one-two into 2 body hooks, 3 x 2 min — train the transition into infighting</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-shiftonetwo-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-shiftonetwo-r3-0"><label><input type="checkbox"><span>Sprints — 6 x 20m</span></label></li>
+              <li data-id="rd-shiftonetwo-r3-1"><label><input type="checkbox"><span>Russian twists — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duran Skill 3 -->
+    <div class="skill-card" data-skill-id="rd-jabuppercut">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">ROBERTO DURAN · ENTRY COMBO</span>
+          <span class="skill-name">The Jab-Uppercut Entry</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Another favorite way inside — a jab to get a reaction, immediately followed by an uppercut that splits the opponent's guard and lets him step directly into close range behind it.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Step in behind the jab as usual.</li>
+              <li>On the uppercut, drive up off a bent rear leg — the punch and the forward step happen together, not one after the other.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Jab first, aimed to draw the opponent's hands together or up slightly.</li>
+              <li>The uppercut comes immediately after, rising through the gap in their guard — short and compact, generated by the legs driving up, not just the arm.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="rd-jabuppercut-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-jabuppercut-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="rd-jabuppercut-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, leg-drive rehearsal only</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-jabuppercut-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">20 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-jabuppercut-r2-0"><label><input type="checkbox"><span>Heavy bag: jab-uppercut, 5 x 3 min, focus on the immediate step-in after the uppercut lands</span></label></li>
+              <li data-id="rd-jabuppercut-r2-1"><label><input type="checkbox"><span>Shadow boxing: same combo, exaggerate the leg drive on the uppercut — 4 x 2 min</span></label></li>
+              <li data-id="rd-jabuppercut-r2-2"><label><input type="checkbox"><span>Follow-up: jab-uppercut into 2 infighting hooks, 3 x 2 min</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-jabuppercut-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-jabuppercut-r3-0"><label><input type="checkbox"><span>Squat jumps — 3 x 10</span></label></li>
+              <li data-id="rd-jabuppercut-r3-1"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duran Skill 4 -->
+    <div class="skill-card" data-skill-id="rd-cutring">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">ROBERTO DURAN · PRESSURE FOOTWORK</span>
+          <span class="skill-name">Cutting Off the Ring</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Duran almost never chased an opponent in a straight line — he cut angles to close distance, taking away the ring a step at a time, so an opponent trying to circle away kept running into him instead of escaping.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Instead of moving straight toward an opponent, step diagonally to intercept the direction they're circling — if they move right, cut that path off rather than following straight behind them.</li>
+              <li>Keep steps short and controlled. Overcommitting on one big step is how pressure fighters get countered.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Keep the guard tight and high while cutting angles — you're positioning, not punching, for most of this movement.</li>
+              <li>Once the angle is cut off and the opponent has nowhere to circle, that's when the offense starts.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="rd-cutring-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-cutring-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="rd-cutring-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, diagonal steps only</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-cutring-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">19 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-cutring-r2-0"><label><input type="checkbox"><span>Footwork only: practice diagonal cutting steps against an imaginary circling opponent — 5 min continuous</span></label></li>
+              <li data-id="rd-cutring-r2-1"><label><input type="checkbox"><span>Shadow boxing: cut the angle, then follow with a 3-punch combination once "trapped" — 4 x 2 min</span></label></li>
+              <li data-id="rd-cutring-r2-2"><label><input type="checkbox"><span>Heavy bag: circle around the bag while staying square to it, simulating ring-cutting footwork — 3 x 2 min</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-cutring-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">7 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-cutring-r3-0"><label><input type="checkbox"><span>Battle ropes — 3 x 30 sec</span></label></li>
+              <li data-id="rd-cutring-r3-1"><label><input type="checkbox"><span>Sit-ups — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duran Skill 5 -->
+    <div class="skill-card" data-skill-id="rd-liver">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">ROBERTO DURAN · BODY ATTACK</span>
+          <span class="skill-name">The Liver Attack</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Once Duran got to close range, the body became a primary target — short, brutal hooks delivered while tying up an opponent's offense, designed to wear down the legs and the will over a fight rather than land one big shot.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Stay low and centered at close range — bend the knees rather than bending at the waist to reach the body.</li>
+              <li>Weight balanced between both feet so you can fire either hand without telegraphing which one.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Keep both hands active and close to the body at this range — short, compact hooks, since there's no room for a long punch up close.</li>
+              <li>Aim for the lower ribs and liver (opponent's right side, your left hand). Keep your head moving the entire time you work the body.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="rd-liver-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-liver-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="rd-liver-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, close-range stance rehearsal</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-liver-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">19 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-liver-r2-0"><label><input type="checkbox"><span>Heavy bag, close range: body hooks only, both hands, 5 x 2 min, stay tight to the bag the whole round</span></label></li>
+              <li data-id="rd-liver-r2-1"><label><input type="checkbox"><span>Shadow boxing: stay at "close range" against an imaginary opponent, working body shots with active head movement — 4 x 2 min</span></label></li>
+              <li data-id="rd-liver-r2-2"><label><input type="checkbox"><span>Combine: jab-uppercut entry into a 4-punch body attack, 3 x 2 min</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-liver-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-liver-r3-0"><label><input type="checkbox"><span>Med ball rotational slams — 3 x 10</span></label></li>
+              <li data-id="rd-liver-r3-1"><label><input type="checkbox"><span>Plank — 2 x 1 min</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duran Skill 6 -->
+    <div class="skill-card" data-skill-id="rd-feintcounter">
+      <div class="skill-card-head">
+        <div class="skill-head-left">
+          <span class="skill-tag">ROBERTO DURAN · COUNTER PUNCHING</span>
+          <span class="skill-name">Feint-and-Counter Pressure</span>
+        </div>
+        <div class="skill-head-right">
+          <button class="star-btn" aria-label="Add to focus list">○</button>
+          <span class="skill-chevron">▾</span>
+        </div>
+      </div>
+      <div class="skill-body">
+        <p class="skill-desc">Duran's aggression was rarely careless. He'd move forward throwing feints, draw an opponent into throwing first, and then capitalize on the opening — using pressure as the setup for a counter rather than a wild brawl.</p>
+        <div class="skill-spec">
+          <div class="skill-spec-col">
+            <h4>FEET</h4>
+            <ul>
+              <li>Advance steadily, same pressure footwork as cutting off the ring, but stay ready to plant and load a counter the instant an opponent commits to a punch.</li>
+              <li>Don't lunge during the feint phase — small advances only, base ready to counter at any moment.</li>
+            </ul>
+          </div>
+          <div class="skill-spec-col">
+            <h4>HANDS</h4>
+            <ul>
+              <li>Throw a feint (a partial jab, a shoulder dip) and read the reaction — do they flinch, throw back, cover up?</li>
+              <li>The moment they commit to their own punch, counter immediately into the opening it created. Rear hand stays home throughout the feinting phase.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-workout">
+          <h4 class="skill-workout-title">TODAY'S WORKOUT</h4>
+          <div class="round-card" data-key="rd-feintcounter-r1">
+            <div class="round-card-head"><span><span class="round-label">WARM-UP</span></span><span class="round-time">5 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-feintcounter-r1-0"><label><input type="checkbox"><span>Jump rope — 2 x 2 min</span></label></li>
+              <li data-id="rd-feintcounter-r1-1"><label><input type="checkbox"><span>Shadow boxing — 1 x 2 min, feint rehearsal only, no real punches</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-feintcounter-r2">
+            <div class="round-card-head"><span><span class="round-label">SKILL DRILLING</span></span><span class="round-time">19 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-feintcounter-r2-0"><label><input type="checkbox"><span>Shadow boxing: feint, read an imaginary reaction, counter — 5 x 2 min, vary the feint each round</span></label></li>
+              <li data-id="rd-feintcounter-r2-1"><label><input type="checkbox"><span>Heavy bag: push the bag to simulate incoming motion, feint before it returns, counter as it swings back — 4 x 2 min</span></label></li>
+              <li data-id="rd-feintcounter-r2-2"><label><input type="checkbox"><span>Mirror work: confirm your feints look believable and your hands stay home during them — 3 min</span></label></li>
+            </ul>
+          </div>
+          <div class="round-card" data-key="rd-feintcounter-r3">
+            <div class="round-card-head"><span><span class="round-label">FINISHER</span></span><span class="round-time">8 MIN <span class="round-chevron">▾</span></span></div>
+            <ul class="exercise-list">
+              <li data-id="rd-feintcounter-r3-0"><label><input type="checkbox"><span>Sprints — 6 x 20m</span></label></li>
+              <li data-id="rd-feintcounter-r3-1"><label><input type="checkbox"><span>Russian twists — 3 x 20</span></label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ===== END FOLDER: DURAN ===== -->
+
+<footer class="wrap">
+  <table class="week-table">
+    <tr><td class="wd">TUE</td><td class="wn">Range War</td><td>Pawing jab, stiff-arm control</td></tr>
+    <tr><td class="wd">THU</td><td class="wn">The Angle</td><td>Pivot power, never-repeat combos</td></tr>
+    <tr><td class="wd">SAT</td><td class="wn">The Finish</td><td>Chopping cross, full fight sim</td></tr>
+  </table>
+  <p class="rest-note"><b>This week-table is the Kronk folder's 3-day program.</b> Rest the other four days — recovery is where any style gets built into your hands. Sugar Ray and Duran are reference folders: pick techniques into your Focus List and drop them into your own training days.</p>
+  <p class="foot-fine">FIGHT HUB · KRONK / SUGAR RAY LEONARD / ROBERTO DURAN · BUILT FOR SOLO TRAINING · PROGRESS SAVED ON THIS DEVICE</p>
+</footer>
+
+<script>
+(function(){
+  // ---------- FOLDER TABS (hub level) ----------
+  var folderTabs = document.querySelectorAll('.folder-tab');
+  var folderPanels = document.querySelectorAll('.folder-panel');
+  folderTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var folder = tab.getAttribute('data-folder');
+      folderTabs.forEach(function(t){t.classList.toggle('active', t===tab);});
+      folderPanels.forEach(function(p){p.classList.toggle('active', p.getAttribute('data-folder')===folder);});
+      window.scrollTo({top: document.getElementById('folderTabs').offsetTop - 4, behavior:'smooth'});
+    });
+  });
+
+  // ---------- DAY TABS ----------
+  var tabs = document.querySelectorAll('.day-tab');
+  var panels = document.querySelectorAll('.day-panel');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var day = tab.getAttribute('data-day');
+      tabs.forEach(function(t){t.classList.toggle('active', t===tab);});
+      panels.forEach(function(p){p.classList.toggle('active', p.getAttribute('data-day')===day);});
+      window.scrollTo({top: document.getElementById('dayTabs').offsetTop - 4, behavior:'smooth'});
+    });
+  });
+
+  // ---------- ROUND CARD ACCORDION ----------
+  document.querySelectorAll('.round-card-head').forEach(function(head){
+    head.addEventListener('click', function(){
+      head.parentElement.classList.toggle('open');
+    });
+  });
+
+  // ---------- PROGRESS PERSISTENCE ----------
+  var STORE_KEY = 'kronk-protocol-progress';
+  var progress = {};
+
+  function applyProgress(){
+    document.querySelectorAll('.exercise-list li[data-id]').forEach(function(li){
+      var id = li.getAttribute('data-id');
+      var checked = !!progress[id];
+      var cb = li.querySelector('input[type="checkbox"]');
+      cb.checked = checked;
+      li.classList.toggle('done', checked);
+    });
+  }
+
+  async function loadProgress(){
+    try{
+      if(window.storage){
+        var res = await window.storage.get(STORE_KEY);
+        if(res && res.value) progress = JSON.parse(res.value);
+      }
+    }catch(e){ /* no saved progress yet, or storage unavailable */ }
+    applyProgress();
+  }
+
+  async function saveProgress(){
+    try{
+      if(window.storage){
+        await window.storage.set(STORE_KEY, JSON.stringify(progress));
+      }
+    }catch(e){ /* fail silently, keep working in-memory */ }
+  }
+
+  document.querySelectorAll('.exercise-list input[type="checkbox"]').forEach(function(cb){
+    cb.addEventListener('change', function(){
+      var li = cb.closest('li');
+      var id = li.getAttribute('data-id');
+      progress[id] = cb.checked;
+      li.classList.toggle('done', cb.checked);
+      saveProgress();
+    });
+  });
+
+  loadProgress();
+
+  // ---------- SKILL VAULT ----------
+  var skillNames = {};
+  document.querySelectorAll('.skill-card[data-skill-id]').forEach(function(card){
+    var id = card.getAttribute('data-skill-id');
+    var name = card.querySelector('.skill-name').textContent;
+    skillNames[id] = name;
+  });
+
+  document.querySelectorAll('.skill-card-head').forEach(function(head){
+    head.addEventListener('click', function(e){
+      if(e.target.closest('.star-btn')) return;
+      head.parentElement.classList.toggle('open');
+    });
+  });
+
+  var FOCUS_KEY = 'kronk-vault-focus';
+  var focus = {};
+
+  function renderFocusList(){
+    var ids = Object.keys(focus).filter(function(id){ return focus[id]; });
+    var emptyEl = document.getElementById('focusListEmpty');
+    var chipsEl = document.getElementById('focusListChips');
+    if(ids.length===0){
+      emptyEl.style.display='block';
+      chipsEl.innerHTML='';
+      return;
+    }
+    emptyEl.style.display='none';
+    chipsEl.innerHTML = ids.map(function(id){
+      return '<span class="focus-chip">' + (skillNames[id]||id) + '</span>';
+    }).join('');
+  }
+
+  function applyFocus(){
+    document.querySelectorAll('.skill-card[data-skill-id]').forEach(function(card){
+      var id = card.getAttribute('data-skill-id');
+      var on = !!focus[id];
+      var btn = card.querySelector('.star-btn');
+      btn.classList.toggle('selected', on);
+      btn.textContent = on ? '★' : '○';
+    });
+    renderFocusList();
+  }
+
+  async function loadFocus(){
+    try{
+      if(window.storage){
+        var res = await window.storage.get(FOCUS_KEY);
+        if(res && res.value) focus = JSON.parse(res.value);
+      }
+    }catch(e){ /* nothing saved yet, or storage unavailable */ }
+    applyFocus();
+  }
+
+  async function saveFocus(){
+    try{
+      if(window.storage){
+        await window.storage.set(FOCUS_KEY, JSON.stringify(focus));
+      }
+    }catch(e){ /* fail silently, keep working in-memory */ }
+  }
+
+  document.querySelectorAll('.star-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var card = btn.closest('.skill-card');
+      var id = card.getAttribute('data-skill-id');
+      focus[id] = !focus[id];
+      applyFocus();
+      saveFocus();
+    });
+  });
+
+  loadFocus();
+
+})();
+</script>
+
+</body>
+</html>
