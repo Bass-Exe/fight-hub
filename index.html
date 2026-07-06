@@ -571,6 +571,195 @@
     .stance-diagrams{grid-template-columns:1fr;}
   }
 
+  /* ---------- FOOTWORK LAB ---------- */
+  .footwork-lab{
+    margin:28px 0 10px;
+    border:1px solid var(--line);
+    background:var(--bg-elev);
+  }
+  .footwork-lab-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 16px;
+    background:linear-gradient(90deg,rgba(232,169,60,0.12),transparent 70%);
+    border-bottom:1px solid var(--line);
+  }
+  .footwork-lab-head h3{
+    font-family:var(--font-display);
+    font-size:22px;
+    letter-spacing:0.02em;
+    color:var(--gold-bright);
+    margin:0;
+  }
+  .footwork-lab-head .fl-tag{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:0.12em;
+    color:var(--muted);
+    background:var(--bg);
+    border:1px solid var(--line);
+    padding:3px 8px;
+  }
+  .footwork-lab-body{padding:16px;}
+  .footwork-lab-body p{
+    font-size:13.5px;
+    color:#d9d0c0;
+    margin:0 0 14px;
+  }
+  .drill-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .drill-tile{
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-left:3px solid var(--red);
+    padding:11px 12px;
+  }
+  .drill-tile.gold{border-left-color:var(--gold);}
+  .drill-tile h4{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:0.1em;
+    color:var(--gold-bright);
+    margin:0 0 6px;
+  }
+  .drill-tile.gold h4{color:var(--red);}
+  .drill-tile p{font-size:12.5px; color:#cfc6b6; margin:0 0 5px;}
+  .drill-tile span{font-size:11px; color:var(--muted); font-family:var(--font-mono);}
+  @media(max-width:480px){.drill-row{grid-template-columns:1fr;}}
+
+  /* ---------- COACH HUB ---------- */
+  .coach-sub-tabs{
+    display:flex;
+    gap:0;
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;
+    background:var(--bg-elev);
+    margin-bottom:22px;
+  }
+  .coach-sub-tab{
+    flex:1 0 auto;
+    background:transparent;
+    border:none;
+    border-right:1px solid var(--line);
+    color:var(--muted);
+    padding:12px 10px;
+    cursor:pointer;
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-align:left;
+  }
+  .coach-sub-tab:last-child{border-right:none;}
+  .coach-sub-tab.active{
+    color:var(--gold-bright);
+    box-shadow:inset 0 -3px 0 var(--gold);
+    background:rgba(232,169,60,0.07);
+  }
+  .coach-panel{display:none;}
+  .coach-panel.active{display:block; animation:fadein 0.3s ease;}
+  .pad-flow{
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    border-top:3px solid var(--red);
+    margin-bottom:12px;
+  }
+  .pad-flow-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 14px;
+    cursor:pointer;
+  }
+  .pad-flow-name{font-family:var(--font-display); font-size:18px; color:var(--cream);}
+  .pad-flow-meta{font-family:var(--font-mono); font-size:10.5px; color:var(--gold);}
+  .pad-flow-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.35s ease;
+    border-top:1px solid transparent;
+  }
+  .pad-flow.open .pad-flow-body{
+    max-height:2000px;
+    border-top:1px solid var(--line);
+  }
+  .pad-flow-body p{font-size:13px; color:#d9d0c0; padding:12px 14px 0; margin:0;}
+  .call-grid{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:0;
+    margin:12px 14px 16px;
+    border:1px solid var(--line);
+  }
+  .call-num{
+    font-family:var(--font-display);
+    font-size:22px;
+    color:var(--red);
+    background:var(--bg);
+    padding:8px 12px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    min-width:44px;
+    justify-content:center;
+  }
+  .call-content{
+    padding:8px 12px;
+    border-bottom:1px solid var(--line);
+    border-left:1px solid var(--line);
+    background:var(--bg-elev-2);
+  }
+  .call-num:last-of-type,.call-content:last-of-type{border-bottom:none;}
+  .call-punch{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--gold-bright);
+    display:block;
+    margin-bottom:3px;
+  }
+  .call-cue{font-size:12.5px; color:var(--muted);}
+  .teach-card{
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    margin-bottom:10px;
+    padding:14px 16px;
+  }
+  .teach-card h4{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--gold-bright);
+    margin:0 0 8px;
+  }
+  .teach-card p{font-size:13px; color:#d9d0c0; margin:0 0 6px;}
+  .teach-card ul{padding:0; margin:0;}
+  .teach-card ul li{
+    font-size:12.5px;
+    color:#cfc6b6;
+    padding:5px 0 5px 14px;
+    border-top:1px dashed var(--line);
+    position:relative;
+  }
+  .teach-card ul li:first-child{border-top:none;}
+  .teach-card ul li::before{content:"→"; position:absolute; left:0; color:var(--red);}
+  .level-badge{
+    font-family:var(--font-mono);
+    font-size:9.5px;
+    letter-spacing:0.1em;
+    padding:3px 7px;
+    border:1px solid;
+    display:inline-block;
+    margin-bottom:8px;
+  }
+  .level-badge.beginner{color:#4caf50; border-color:#4caf5060;}
+  .level-badge.intermediate{color:var(--gold); border-color:rgba(232,169,60,0.5);}
+  .level-badge.advanced{color:var(--red); border-color:rgba(200,30,44,0.5);}
+
   /* ---------- FOOTER ---------- */
   footer{
     margin-top:40px;
@@ -620,6 +809,10 @@
   <button class="folder-tab" data-folder="duran">
     <span class="folder-name">Roberto Duran</span>
     <span class="folder-sub">Manos de Piedra — pressure &amp; infighting</span>
+  </button>
+  <button class="folder-tab" data-folder="coach">
+    <span class="folder-name">Coach Hub</span>
+    <span class="folder-sub">Pad work · Teaching skills · Client sessions</span>
   </button>
 </nav>
 
@@ -706,6 +899,91 @@
         </ul>
       </div>
     </div>
+  </div>
+
+  <!-- KRONK FOOTWORK LAB -->
+  <div class="wrap">
+  <div class="footwork-lab">
+    <div class="footwork-lab-head">
+      <h3>Footwork Lab</h3>
+      <span class="fl-tag">KRONK — RANGE &amp; PIVOT</span>
+    </div>
+    <div class="footwork-lab-body">
+      <p><b style="color:var(--gold-bright);">Why Kronk footwork is hard:</b> The tall, slightly bladed stance demands unusual hip flexibility to pivot cleanly and unusual calf/glute strength to stay on the balls of your feet for long rounds. Most people either collapse their weight back to the heel after a few minutes (killing their pivot speed) or lose the stance entirely and go flat. The fix is to train the foot and hip strength separately before expecting it to last in rounds.</p>
+
+      <h4 class="skill-workout-title">PHASE 1 — COORDINATION (do this before any bag work)</h4>
+      <div class="drill-row">
+        <div class="drill-tile">
+          <h4>BALL-OF-FOOT HOLD</h4>
+          <p>Stand in Kronk stance, rise onto balls of both feet, hold 30 sec. Step off, repeat. Builds the calf endurance to stop heel-dropping.</p>
+          <span>3 x 30 sec hold · 15 sec rest</span>
+        </div>
+        <div class="drill-tile gold">
+          <h4>SLOW PIVOT DRILL</h4>
+          <p>From stance: jab to the heavy bag, pivot 45° on the lead foot — slow motion, stop at the new angle, check your stance width. Reset. Repeat.</p>
+          <span>10 reps each side · 3 sets</span>
+        </div>
+        <div class="drill-tile">
+          <h4>TALL STANCE WALK</h4>
+          <p>Walk forward in Kronk stance across the room — tall posture, lead foot pointing forward, rear foot at 45°. Focus on staying on the balls of both feet the whole walk.</p>
+          <span>4 x 20 steps forward + back</span>
+        </div>
+        <div class="drill-tile gold">
+          <h4>PIVOT + RESET</h4>
+          <p>Shadow box, no punches — just pivot left, pivot right, reset stance each time. Keep your hands up every single rep. Builds the muscle memory for pivoting without dropping the guard.</p>
+          <span>3 x 2 min continuous</span>
+        </div>
+      </div>
+
+      <h4 class="skill-workout-title">PHASE 2 — STRENGTH (off-days or before session)</h4>
+      <div class="drill-row">
+        <div class="drill-tile">
+          <h4>CALF RAISES (single leg)</h4>
+          <p>Stand on one foot, rise up onto the ball of that foot, lower slowly. Builds the endurance to stay off your heels in stance all round.</p>
+          <span>3 x 20 each leg</span>
+        </div>
+        <div class="drill-tile gold">
+          <h4>LATERAL BAND WALKS</h4>
+          <p>Resistance band around ankles, stay in a slight squat, step laterally left then right. Builds the hip abductors that power lateral pivots.</p>
+          <span>3 x 15 steps each direction</span>
+        </div>
+        <div class="drill-tile">
+          <h4>SPLIT SQUAT (rear foot elevated)</h4>
+          <p>Rear foot elevated on a bench, front foot forward. Lower slowly. Builds the glute and quad strength that keeps your back leg loaded and ready to pivot.</p>
+          <span>3 x 10 each leg</span>
+        </div>
+        <div class="drill-tile gold">
+          <h4>ROTATIONAL MEDICINE BALL</h4>
+          <p>Stand in stance, hold a light med ball, rotate hips sharply side to side — same motion as the pivot. Builds rotational power and trains the hip snap that makes pivots explosive.</p>
+          <span>3 x 20 rotations</span>
+        </div>
+      </div>
+
+      <h4 class="skill-workout-title">PHASE 3 — ENDURANCE (build up week by week)</h4>
+      <div class="drill-row">
+        <div class="drill-tile">
+          <h4>ROUND 1 GOAL</h4>
+          <p>One full 3-min shadow boxing round staying on the balls of your feet the entire time. No breaks in stance. This is your baseline — if you can't do one round, start here every session until you can.</p>
+          <span>Week 1 target</span>
+        </div>
+        <div class="drill-tile gold">
+          <h4>ROUND 3 GOAL</h4>
+          <p>Three consecutive rounds maintaining the tall, bladed Kronk stance. Between rounds, walk the room in stance — never fully rest out of it. Week 3 target.</p>
+          <span>Week 3 target</span>
+        </div>
+        <div class="drill-tile">
+          <h4>ROUND 6 GOAL</h4>
+          <p>Six rounds in stance. This is where most people get sloppy in rounds 4–5. The fix is not willpower — it's going back to Phase 2 strength work weekly so the muscles last longer before giving out.</p>
+          <span>Week 6 target</span>
+        </div>
+        <div class="drill-tile gold">
+          <h4>THE RULE</h4>
+          <p>Every time you catch yourself on your heels — stop, reset, rise back up. Don't keep going with bad stance. Ten perfect reps beat thirty sloppy ones.</p>
+          <span>Always</span>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <nav class="day-tabs wrap" id="dayTabs">
@@ -1401,6 +1679,89 @@
       </div>
     </div>
 
+    <!-- ====================== FOOTWORK LAB ====================== -->
+    <div class="footwork-lab" style="margin-top:28px;">
+      <div class="footwork-lab-head">
+        <h3>Footwork Lab</h3>
+        <span class="fl-tag">SUGAR RAY — LATERAL MOVEMENT</span>
+      </div>
+      <div class="footwork-lab-body">
+        <p><b style="color:var(--gold-bright);">Why Leonard's footwork is hard:</b> The 50/50 weight balance sounds easy but it's deceptive — most people unconsciously load one foot, and then their movement is slow in one direction. Leonard's real challenge is the constant resetting. He almost never stood still for more than two punches. Building that habit takes coordination training first, then strength to sustain it, then the endurance to keep moving at round 8 the same way you moved at round 1.</p>
+
+        <h4 class="skill-workout-title">PHASE 1 — COORDINATION</h4>
+        <div class="drill-row">
+          <div class="drill-tile">
+            <h4>WEIGHT CHECK DRILL</h4>
+            <p>Stand in Leonard stance, close your eyes, feel where your weight actually is. Shift it left, right, forward, back — build awareness of your own base. Most people don't know they're leaning until they check.</p>
+            <span>2 min eyes-closed awareness daily</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>STEP-RESET FOOTWORK</h4>
+            <p>Step forward (lead foot first), throw a jab, immediately step back and reset. Every single rep ends with a full stance reset — feet shoulder-width, weight 50/50. Don't rush the reset.</p>
+            <span>3 x 2 min, jab + reset every rep</span>
+          </div>
+          <div class="drill-tile">
+            <h4>CIRCLE LEFT DRILL</h4>
+            <p>Continuous left-circle footwork around an imaginary opponent — push off the back foot, step the lead foot laterally, back foot follows. No crossing, no stopping. This is Leonard's primary escape route.</p>
+            <span>4 x 90 sec, no punches</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>L-STEP PATTERN</h4>
+            <p>Lead foot steps back at 45°, rear foot follows to re-establish stance. You've moved off the line without retreating straight back. Drill it in both directions until it's automatic.</p>
+            <span>10 reps each direction, 3 sets</span>
+          </div>
+        </div>
+
+        <h4 class="skill-workout-title">PHASE 2 — STRENGTH</h4>
+        <div class="drill-row">
+          <div class="drill-tile">
+            <h4>LATERAL BOUNDS</h4>
+            <p>Push off one foot, land softly on the other in a balanced stance position. Builds the explosive lateral hip power Leonard used to create angles.</p>
+            <span>3 x 8 each side</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>SINGLE-LEG BALANCE</h4>
+            <p>Stand on your lead leg only, knee slightly bent, for 30 sec. Repeat on the rear leg. Identifies which side is weaker and builds the stabilizer muscles that keep you balanced on one foot mid-pivot.</p>
+            <span>3 x 30 sec each leg</span>
+          </div>
+          <div class="drill-tile">
+            <h4>LATERAL SHUFFLE + STOP</h4>
+            <p>Shuffle laterally 5 steps left, stop dead in a balanced stance. Shuffle 5 steps right, stop dead. The "stop dead" is the skill — don't drift, don't stumble, land in your stance.</p>
+            <span>3 x 10 shuffles each direction</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>BOX JUMPS</h4>
+            <p>Jump and land softly in boxing stance — both feet landing simultaneously, weight even, knees soft. Trains the landing mechanics that keep you balanced after movement.</p>
+            <span>3 x 10</span>
+          </div>
+        </div>
+
+        <h4 class="skill-workout-title">PHASE 3 — ENDURANCE</h4>
+        <div class="drill-row">
+          <div class="drill-tile">
+            <h4>THE RULE: NEVER STOP</h4>
+            <p>Leonard almost never stood flat-footed for more than a punch or two. In training: pick a round every session and commit to constant movement the entire round. No resting your weight back. Not for one second.</p>
+            <span>1 full movement round per session</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>JUMP ROPE AS FOOTWORK</h4>
+            <p>Treat jump rope sessions as footwork training, not cardio. Alternate foot, side-to-side hops, forward and back — the same movement patterns you use in the ring. 3 x 3 min at the start of every session.</p>
+            <span>3 x 3 min every session</span>
+          </div>
+          <div class="drill-tile">
+            <h4>WEEK 4 TARGET</h4>
+            <p>Four full rounds with constant lateral movement — circle left, L-step, step-in-jab-reset, repeat. If your movement degrades in round 3, go back to Phase 2 — it's a strength problem, not a cardio problem.</p>
+            <span>Week 4 goal</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>FOOTWORK CHECK</h4>
+            <p>Film yourself during one round every week. You will catch heel-dropping, stance-widening, and other breakdowns you can't feel from the inside. This is the fastest way to fix footwork problems.</p>
+            <span>Weekly self-check</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ====================== JAB MASTERCLASS ====================== -->
     <h3 class="workout-title" style="margin-top:30px;">JAB MASTERCLASS + FOOTWORK</h3>
     <p class="technique-intro" style="margin-bottom:18px;">Leonard almost always used the jab as the initiator for any attack — but he varied the level of the target to confuse opponents. Below are the five versions of his jab, each one tied to specific footwork. These aren't just punch variations — the feet are what make each one work. Drill each version separately before mixing them.</p>
@@ -2086,6 +2447,89 @@
       </div>
     </div>
 
+    <!-- DURAN FOOTWORK LAB -->
+    <div class="footwork-lab" style="margin-top:28px;">
+      <div class="footwork-lab-head">
+        <h3>Footwork Lab</h3>
+        <span class="fl-tag">DURAN — FORWARD PRESSURE</span>
+      </div>
+      <div class="footwork-lab-body">
+        <p><b style="color:var(--gold-bright);">Why Duran's footwork is hard:</b> The forward lean is the hardest part. Duran's weight sits slightly forward — built to advance — but most people who try it fall into a hunched, off-balance posture because their core and hip flexors aren't strong enough to hold the lean cleanly. The second problem is endurance: walking someone down for 12 rounds requires both physical conditioning and mental commitment to keep pressing when your legs are tired. Build the strength first, then the habit.</p>
+
+        <h4 class="skill-workout-title">PHASE 1 — COORDINATION</h4>
+        <div class="drill-row">
+          <div class="drill-tile">
+            <h4>THE CORRECT FORWARD LEAN</h4>
+            <p>Stand in Duran stance. Lean your whole body forward from the ankles — not from the waist. Your ears, shoulders, hips, and knees should all be on the same angled line. If your back rounds or your butt sticks out, reset. The lean is athletic, not hunched.</p>
+            <span>Check in mirror daily · 2 min</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>PRESSURE WALK DRILL</h4>
+            <p>Walk forward slowly in Duran stance — compact steps, weight slightly forward, head moving side to side. Stay in stance the whole walk. Every time your weight drifts back or your posture rounds, stop and reset from scratch.</p>
+            <span>4 x 20 steps · slow and deliberate</span>
+          </div>
+          <div class="drill-tile">
+            <h4>DIAGONAL CUT STEPS</h4>
+            <p>Imagine an opponent circling right. Instead of following straight, cut diagonally to intercept — step your lead foot to the right to close off their escape path. Practice both directions until the diagonal feels natural instead of a conscious decision.</p>
+            <span>3 x 2 min shadow, no punches</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>CLOSE-RANGE SHUFFLE</h4>
+            <p>From close range, shuffle forward 2 steps — stay compact, don't lunge. Shuffle back 1 step. The 2-forward-1-back rhythm is Duran's pressure pattern: always advancing, but never overcommitting.</p>
+            <span>3 x 90 sec continuous</span>
+          </div>
+        </div>
+
+        <h4 class="skill-workout-title">PHASE 2 — STRENGTH (the lean requires this)</h4>
+        <div class="drill-row">
+          <div class="drill-tile">
+            <h4>HIP FLEXOR STRETCH (daily)</h4>
+            <p>Low lunge, rear knee on the floor, push hips forward until you feel a deep stretch in the rear hip flexor. Tight hip flexors are the #1 reason people can't maintain the forward lean without rounding their back.</p>
+            <span>2 x 60 sec each side · every day</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>DEAD BUG CORE</h4>
+            <p>Lie on your back, arms up, legs at 90°. Slowly lower opposite arm and leg together, keeping your lower back flat on the floor. Builds the deep core stability that holds the forward lean clean instead of collapsing into a hunch.</p>
+            <span>3 x 10 each side</span>
+          </div>
+          <div class="drill-tile">
+            <h4>SLED PUSH / FORWARD WALK</h4>
+            <p>If you have a sled: push it forward in Duran's forward-lean posture. No sled: bear crawl slowly across the room. Both build the specific pushing strength pattern that powers pressure footwork.</p>
+            <span>4 x 15m</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>COMPACT SQUAT</h4>
+            <p>Feet slightly narrower than shoulder-width (Duran's stance), squat slowly. Builds the quad and glute strength that keeps compact steps powerful and controlled — wide-stance squats train the wrong pattern here.</p>
+            <span>3 x 12</span>
+          </div>
+        </div>
+
+        <h4 class="skill-workout-title">PHASE 3 — ENDURANCE</h4>
+        <div class="drill-row">
+          <div class="drill-tile">
+            <h4>THE PRESSURE ROUND</h4>
+            <p>One full 3-min shadow boxing round where you never stop moving forward. No pausing, no resetting into a neutral stance — constant forward pressure the entire round. This is the single most important Duran endurance drill.</p>
+            <span>1 x per session · build to 3</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>ACTIVE REST BETWEEN ROUNDS</h4>
+            <p>Between rounds, don't stand flat — walk in Duran stance around the ring or room. Your body needs to stay in the pattern even at rest. This is how you build the muscle memory so the stance is automatic in round 8.</p>
+            <span>Every rest period</span>
+          </div>
+          <div class="drill-tile">
+            <h4>LEAN CHECK RULE</h4>
+            <p>Every 30 seconds of shadow boxing, pause for 2 seconds and check: are you still leaning forward from the ankles, not the waist? Is your back straight? Are your knees soft? If not — reset. The check is part of the drill, not a break from it.</p>
+            <span>Ongoing in every session</span>
+          </div>
+          <div class="drill-tile gold">
+            <h4>CORE FINISHER</h4>
+            <p>After every Duran session: plank 2 x 1 min, dead bug 2 x 10 each side, hip flexor stretch 60 sec each side. This isn't optional — the core and hip mobility are what physically hold the stance together round after round.</p>
+            <span>Every session · 8 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h3 class="workout-title">SKILL VAULT — PICK &amp; MASTER</h3>
 
     <!-- Duran Skill 1 -->
@@ -2440,6 +2884,305 @@
 </div>
 <!-- ===== END FOLDER: DURAN ===== -->
 
+<!-- ======================================================= -->
+<!-- FOLDER: COACH HUB                                        -->
+<!-- ======================================================= -->
+<div class="folder-panel" data-folder="coach">
+  <div class="wrap">
+
+    <span class="bout-tag">FOLDER 4 — COACH HUB</span>
+    <div class="technique-header">
+      <h2>Coach Hub</h2>
+      <p class="credit">Pad Work · Teaching Skills · Client Session Plans</p>
+    </div>
+    <p class="technique-intro">Everything in here is built for you as a trainer — not for your own solo training but for sessions with clients. Three sections: <b style="color:var(--gold-bright);">Pad Work</b> has call-by-call flow sequences for each fighter style so you know exactly what to feed and in what order. <b style="color:var(--gold-bright);">Teaching Skills</b> gives you the coaching cues and progressions to actually transfer each style to a client. <b style="color:var(--gold-bright);">Client Sessions</b> are ready-made session structures at three levels.</p>
+
+    <!-- Sub-tabs -->
+    <div class="coach-sub-tabs" id="coachSubTabs">
+      <button class="coach-sub-tab active" data-coach="padwork">PAD WORK</button>
+      <button class="coach-sub-tab" data-coach="teaching">TEACHING SKILLS</button>
+      <button class="coach-sub-tab" data-coach="sessions">CLIENT SESSIONS</button>
+    </div>
+
+    <!-- ===== PAD WORK ===== -->
+    <div class="coach-panel active" data-coach="padwork">
+      <p class="technique-intro" style="margin-bottom:18px;">Each pad flow below is a call sequence — you call the number, the client throws the combo. Start slow, build speed over the rounds. All flows are designed to reinforce the specific habits of each fighter's style, not just random combinations.</p>
+
+      <!-- Kronk Pad Flows -->
+      <h3 class="workout-title">KRONK PAD FLOWS</h3>
+
+      <div class="pad-flow open" data-key="pf-kronk-1">
+        <div class="pad-flow-head">
+          <span class="pad-flow-name">Kronk Flow 1 — Range Control</span>
+          <span class="pad-flow-meta">BEGINNER · 3 MIN</span>
+        </div>
+        <div class="pad-flow-body">
+          <p>Build the jab-cross foundation. All pad catches are head height. Between combos, step back and reset — don't stand still. Coach: keep moving the pads laterally so the client has to find range.</p>
+          <div class="call-grid">
+            <div class="call-num">1</div><div class="call-content"><span class="call-punch">JAB</span><span class="call-cue">Extend full, snap back. Cue: "snap it back."</span></div>
+            <div class="call-num">1</div><div class="call-content"><span class="call-punch">JAB — JAB</span><span class="call-cue">Double jab, two separate snaps. Cue: "two snaps, not one push."</span></div>
+            <div class="call-num">2</div><div class="call-content"><span class="call-punch">CROSS</span><span class="call-cue">Right hip drives it. Cue: "hip to hand."</span></div>
+            <div class="call-num">1-2</div><div class="call-content"><span class="call-punch">JAB — CROSS</span><span class="call-cue">Client steps in with jab. Cue: "foot first."</span></div>
+            <div class="call-num">1-1-2</div><div class="call-content"><span class="call-punch">JAB — JAB — CROSS</span><span class="call-cue">Double jab to set up the right hand. Cue: "third one counts."</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad-flow" data-key="pf-kronk-2">
+        <div class="pad-flow-head">
+          <span class="pad-flow-name">Kronk Flow 2 — Angle &amp; Power</span>
+          <span class="pad-flow-meta">INTERMEDIATE · 3 MIN</span>
+        </div>
+        <div class="pad-flow-body">
+          <p>After each combo, step out with the pad and point to the new position — client must pivot and reset to the new angle before throwing again. This drills the pivot-then-punch habit.</p>
+          <div class="call-grid">
+            <div class="call-num">1-2</div><div class="call-content"><span class="call-punch">JAB — PIVOT — CROSS</span><span class="call-cue">Hold right pad for the cross from the new angle. Cue: "pivot first, then cross."</span></div>
+            <div class="call-num">1-2-3</div><div class="call-content"><span class="call-punch">JAB — CROSS — HOOK</span><span class="call-cue">Hold hook pad at 90°. Cue: "elbow up on the hook."</span></div>
+            <div class="call-num">3</div><div class="call-content"><span class="call-punch">LEFT HOOK ONLY</span><span class="call-cue">Single hook, full hip rotation. Cue: "rotate all the way through."</span></div>
+            <div class="call-num">2-3</div><div class="call-content"><span class="call-punch">CROSS — LEFT HOOK</span><span class="call-cue">Two-piece power combo. Cue: "cross opens the door, hook goes through it."</span></div>
+            <div class="call-num">1-2-3-2</div><div class="call-content"><span class="call-punch">JAB — CROSS — HOOK — CROSS</span><span class="call-cue">Full Kronk four-punch combo. Cue: "keep coming forward."</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad-flow" data-key="pf-kronk-3">
+        <div class="pad-flow-head">
+          <span class="pad-flow-name">Kronk Flow 3 — The Chopping Cross</span>
+          <span class="pad-flow-meta">ADVANCED · 3 MIN</span>
+        </div>
+        <div class="pad-flow-body">
+          <p>Hold the right pad slightly higher than normal and angled downward — the client must come over it, not through it. This forces the chopping cross arc. Coach: tap the pad down after each cross to confirm they came over the top.</p>
+          <div class="call-grid">
+            <div class="call-num">2↓</div><div class="call-content"><span class="call-punch">CHOPPING CROSS</span><span class="call-cue">Pad held high. Cue: "come over, not through."</span></div>
+            <div class="call-num">1-2↓</div><div class="call-content"><span class="call-punch">JAB — CHOPPING CROSS</span><span class="call-cue">Jab opens the space, chop follows. Cue: "jab gets their hands busy, then you chop."</span></div>
+            <div class="call-num">1-1-2↓</div><div class="call-content"><span class="call-punch">DOUBLE JAB — CHOP</span><span class="call-cue">Cue: "two jabs to distract, one chop to finish."</span></div>
+            <div class="call-num">1-2↓-PIVOT</div><div class="call-content"><span class="call-punch">JAB — CHOP — PIVOT OUT</span><span class="call-cue">Client pivots off the bag after the chop — don't stand in front after you land it.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sugar Ray Pad Flows -->
+      <h3 class="workout-title" style="margin-top:28px;">SUGAR RAY PAD FLOWS</h3>
+
+      <div class="pad-flow" data-key="pf-sr-1">
+        <div class="pad-flow-head">
+          <span class="pad-flow-name">Sugar Ray Flow 1 — Jab &amp; Move</span>
+          <span class="pad-flow-meta">BEGINNER · 3 MIN</span>
+        </div>
+        <div class="pad-flow-body">
+          <p>After every single combo, step back with the pads and point left — client circles left before you call the next combo. Non-negotiable: no standing flat. If they stop moving, stop holding pads until they're moving again.</p>
+          <div class="call-grid">
+            <div class="call-num">1</div><div class="call-content"><span class="call-punch">JAB — MOVE</span><span class="call-cue">Client jabs and circles left immediately. Cue: "jab is not a stop sign."</span></div>
+            <div class="call-num">1-1</div><div class="call-content"><span class="call-punch">DOUBLE JAB — MOVE</span><span class="call-cue">Cue: "two jabs, then you're gone."</span></div>
+            <div class="call-num">1-1-1</div><div class="call-content"><span class="call-punch">TRIPLE JAB</span><span class="call-cue">Three micro-steps forward with each jab. Cue: "your feet move with the jab."</span></div>
+            <div class="call-num">1B</div><div class="call-content"><span class="call-punch">JAB TO BODY</span><span class="call-cue">Hold low pad. Cue: "bend the knees, not the back."</span></div>
+            <div class="call-num">1B-1</div><div class="call-content"><span class="call-punch">BODY JAB — HEAD JAB</span><span class="call-cue">Client changes levels. Cue: "up and down, confuse them."</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad-flow" data-key="pf-sr-2">
+        <div class="pad-flow-head">
+          <span class="pad-flow-name">Sugar Ray Flow 2 — Feint &amp; Counter</span>
+          <span class="pad-flow-meta">INTERMEDIATE · 3 MIN</span>
+        </div>
+        <div class="pad-flow-body">
+          <p>Before each combination, FAKE a pad movement — move as if you're about to call a combo but don't. Client should react, you call "no" (they hold), then call the real combo. Trains the feint habit and reactive patience.</p>
+          <div class="call-grid">
+            <div class="call-num">F-2</div><div class="call-content"><span class="call-punch">FEINT — CROSS</span><span class="call-cue">Client dips a shoulder feint, then fires the cross. Cue: "sell the feint like you mean it."</span></div>
+            <div class="call-num">F-1-2</div><div class="call-content"><span class="call-punch">FEINT — JAB — CROSS</span><span class="call-cue">Feint draws the reaction, jab-cross follows. Cue: "feint first, every time."</span></div>
+            <div class="call-num">SLIP-2</div><div class="call-content"><span class="call-punch">SLIP — CROSS COUNTER</span><span class="call-cue">Coach throws a light jab at client's face. Client slips outside, counters with cross. Cue: "slip and answer."</span></div>
+            <div class="call-num">PULL-1</div><div class="call-content"><span class="call-punch">PULL BACK — JAB</span><span class="call-cue">Coach reaches jab toward client. Client leans back, fires counter jab. Cue: "lean from the waist, not your feet."</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad-flow" data-key="pf-sr-3">
+        <div class="pad-flow-head">
+          <span class="pad-flow-name">Sugar Ray Flow 3 — Steal the Round</span>
+          <span class="pad-flow-meta">ADVANCED · 3 MIN</span>
+        </div>
+        <div class="pad-flow-body">
+          <p>Timed round: client boxes at 50% for the first 2 min 30 sec — circling, single jabs, staying elusive. Coach calls "LAST THIRTY" — client goes all-out max volume for the final 30 seconds. This is the championship round drill.</p>
+          <div class="call-grid">
+            <div class="call-num">0:00</div><div class="call-content"><span class="call-punch">CONSERVATION PHASE</span><span class="call-cue">Single jabs, movement, feints. Cue: "don't give them anything, just score."</span></div>
+            <div class="call-num">2:30</div><div class="call-content"><span class="call-punch">"LAST THIRTY"</span><span class="call-cue">Coach calls it. Client explodes — max volume combinations, non-stop. Cue: "take the round right now."</span></div>
+            <div class="call-num">3:00</div><div class="call-content"><span class="call-punch">RESET</span><span class="call-cue">Round ends, guard up immediately. Cue: "hands up even after the bell."</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duran Pad Flows -->
+      <h3 class="workout-title" style="margin-top:28px;">DURAN PAD FLOWS</h3>
+
+      <div class="pad-flow" data-key="pf-rd-1">
+        <div class="pad-flow-head">
+          <span class="pad-flow-name">Duran Flow 1 — Pressure Entry</span>
+          <span class="pad-flow-meta">BEGINNER · 3 MIN</span>
+        </div>
+        <div class="pad-flow-body">
+          <p>Hold pads at close range from the start — don't give the client room to box at distance. Every combo ends with you stepping into them. Cue them to stay forward and compact, not to back up after throwing.</p>
+          <div class="call-grid">
+            <div class="call-num">1</div><div class="call-content"><span class="call-punch">JAB (STEP IN)</span><span class="call-cue">Client jabs and steps forward — not back. Cue: "stay on them."</span></div>
+            <div class="call-num">1-2</div><div class="call-content"><span class="call-punch">JAB — CROSS (STEP IN)</span><span class="call-cue">Both punches stepping forward. Cue: "every punch goes with a step."</span></div>
+            <div class="call-num">1-U</div><div class="call-content"><span class="call-punch">JAB — UPPERCUT</span><span class="call-cue">Hold pad low for uppercut. Cue: "drive up from the legs."</span></div>
+            <div class="call-num">1-U-3</div><div class="call-content"><span class="call-punch">JAB — UPPERCUT — HOOK</span><span class="call-cue">Entry combo. Cue: "jab opens, uppercut enters, hook finishes."</span></div>
+            <div class="call-num">B-B</div><div class="call-content"><span class="call-punch">BODY — BODY</span><span class="call-cue">Both pads low. Cue: "stay compact, head moving the whole time."</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad-flow" data-key="pf-rd-2">
+        <div class="pad-flow-head">
+          <span class="pad-flow-name">Duran Flow 2 — Infighting</span>
+          <span class="pad-flow-meta">INTERMEDIATE · 3 MIN</span>
+        </div>
+        <div class="pad-flow-body">
+          <p>Work from inside range the entire round. Pads stay close to your own body — client has to get in close to reach them. After each combo, push them back slightly, then they have to re-enter. Trains the cut-off-the-ring habit.</p>
+          <div class="call-grid">
+            <div class="call-num">B-H</div><div class="call-content"><span class="call-punch">BODY — HEAD HOOK</span><span class="call-cue">Body shot first, then the hook upstairs. Cue: "body drops their guard, hook cleans up."</span></div>
+            <div class="call-num">3B-3H</div><div class="call-content"><span class="call-punch">BODY HOOK — HEAD HOOK</span><span class="call-cue">Both hooks from close range. Cue: "short and tight, not wide swings."</span></div>
+            <div class="call-num">1-U-3B</div><div class="call-content"><span class="call-punch">JAB — UPPERCUT — BODY HOOK</span><span class="call-cue">Full entry sequence with body finish. Cue: "end in the body."</span></div>
+            <div class="call-num">SMOTHER</div><div class="call-content"><span class="call-punch">CIRCLE HANDS + BODY</span><span class="call-cue">Client circles one hand over your lead arm, then fires a body shot with the free hand. Cue: "control first, then punish."</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pad-flow" data-key="pf-rd-3">
+        <div class="pad-flow-head">
+          <span class="pad-flow-name">Duran Flow 3 — Feint &amp; Counter Pressure</span>
+          <span class="pad-flow-meta">ADVANCED · 3 MIN</span>
+        </div>
+        <div class="pad-flow-body">
+          <p>Coach steps toward client between combos — client must NOT back up. They feint forward to draw a reaction, counter when you react, then keep pressing. This is the highest-level Duran skill: pressure as a counter tool.</p>
+          <div class="call-grid">
+            <div class="call-num">F→2</div><div class="call-content"><span class="call-punch">ADVANCE FEINT — COUNTER CROSS</span><span class="call-cue">Client steps in (feint), reads your reaction, fires cross into the opening. Cue: "make them react, then punish the reaction."</span></div>
+            <div class="call-num">F→U</div><div class="call-content"><span class="call-punch">FEINT — COUNTER UPPERCUT</span><span class="call-cue">Feint draws hands together, uppercut splits them. Cue: "feint gets their hands busy."</span></div>
+            <div class="call-num">CUT-3B</div><div class="call-content"><span class="call-punch">CUT THE ANGLE — BODY HOOK</span><span class="call-cue">Coach circles right. Client cuts off the angle (diagonal step), lands body hook once cornered. Cue: "don't chase, intercept."</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END PAD WORK -->
+
+    <!-- ===== TEACHING SKILLS ===== -->
+    <div class="coach-panel" data-coach="teaching">
+      <p class="technique-intro" style="margin-bottom:18px;">These are coaching cue cards — what to say, what to look for, and how to fix the most common mistakes when teaching each style. The mistakes listed are the ones you'll see every single session with new clients.</p>
+
+      <h3 class="workout-title">TEACHING KRONK</h3>
+      <div class="teach-card">
+        <h4>THE 3 THINGS EVERY KRONK STUDENT GETS WRONG FIRST</h4>
+        <ul>
+          <li><b style="color:var(--gold-bright);">Dropping to flat feet after the jab</b> — they extend the jab, their weight shifts forward, and they land on their heel. Fix: have them jab and immediately rise back onto the ball of the lead foot. Do it 20 times slow before adding any speed.</li>
+          <li><b style="color:var(--gold-bright);">Pivoting with the weight forward</b> — they try to pivot when their weight has already shifted to the front foot, which makes the pivot slow and off-balance. Fix: the pivot starts BEFORE the weight shift completes — it's mid-punch, not after.</li>
+          <li><b style="color:var(--gold-bright);">The rear hand drifts on the cross</b> — after the cross, their rear hand hangs instead of snapping back. Fix: have them say "snap" out loud as the fist returns. The audio cue trains the habit faster than just telling them.</li>
+        </ul>
+      </div>
+      <div class="teach-card">
+        <h4>KRONK COACHING CUES THAT WORK</h4>
+        <ul>
+          <li>"Reach before you step" — for the jab. Lead hand extends first, foot follows, not the other way around.</li>
+          <li>"Hip to hand" — for the cross. The hip rotation drives the punch. If they're all arm, point to their hip and say this.</li>
+          <li>"Pivot and find them" — after the pivot, they often lose track of where the pads are. Cue: turn and find the target immediately after pivoting, not after a pause.</li>
+          <li>"Tall and quiet" — for stance. If they start squatting or bouncing, remind them: tall posture, quiet feet between punches.</li>
+        </ul>
+      </div>
+
+      <h3 class="workout-title" style="margin-top:24px;">TEACHING SUGAR RAY</h3>
+      <div class="teach-card">
+        <h4>THE 3 THINGS EVERY SUGAR RAY STUDENT GETS WRONG FIRST</h4>
+        <ul>
+          <li><b style="color:var(--gold-bright);">Moving after the punch instead of with it</b> — they throw, then move. The stance reset needs to happen as the last punch lands, not after a pause. Fix: have them take one step while throwing the last punch of every combo.</li>
+          <li><b style="color:var(--gold-bright);">Throwing feints with the whole body</b> — a big wind-up feint is easy to read. Leonard's feints were small — a shoulder roll, a partial extension, a knee dip. Fix: have them practice a feint that moves only the shoulder. If their feet move, it's too big.</li>
+          <li><b style="color:var(--gold-bright);">Losing the 50/50 weight balance under pressure</b> — when they get hit or pressured, they load back onto the rear foot and get stuck. Fix: teach them to reset the weight balance immediately after eating a punch — it's a trained response, not a natural one.</li>
+        </ul>
+      </div>
+      <div class="teach-card">
+        <h4>SUGAR RAY COACHING CUES THAT WORK</h4>
+        <ul>
+          <li>"Jab is not a stop sign" — every jab ends with movement. Say this after every jab they throw while standing still.</li>
+          <li>"Circle to survive" — after being pressured. Don't back up in a straight line, circle to safety.</li>
+          <li>"Small feints, big reactions" — the point of the feint is to get a reaction, not to look dramatic. Smaller feints are actually harder for an opponent to ignore.</li>
+          <li>"Find the chest" — when they're watching hands instead of the center of mass. Chest movement predicts punches. Hands react to punches.</li>
+        </ul>
+      </div>
+
+      <h3 class="workout-title" style="margin-top:24px;">TEACHING DURAN</h3>
+      <div class="teach-card">
+        <h4>THE 3 THINGS EVERY DURAN STUDENT GETS WRONG FIRST</h4>
+        <ul>
+          <li><b style="color:var(--gold-bright);">Hunching the back on the forward lean</b> — they try to lean forward but it comes from rounding the back, not from the ankles. This destroys their power base. Fix: have them lean forward like a wall that's tilting — the whole body on one angle, back straight, chin tucked.</li>
+          <li><b style="color:var(--gold-bright);">Retreating after body shots</b> — Duran never backs up after landing a body shot. Students instinctively step back after punching. Fix: the footwork drill is: punch, then immediately shuffle FORWARD one step. Make the forward step part of the habit, not optional.</li>
+          <li><b style="color:var(--gold-bright);">Losing head movement as they get tired</b> — by round 3–4, the head stops moving and they just plod forward. This is a conditioning issue but also a focus issue. Fix: in training, call "head" periodically — they must dip or move their head on that cue. Keeps it in the foreground.</li>
+        </ul>
+      </div>
+      <div class="teach-card">
+        <h4>DURAN COACHING CUES THAT WORK</h4>
+        <ul>
+          <li>"Lean from the ankles" — not the waist, not the neck. Whole body tilted forward as one unit. Tap their ankles if they're bending at the waist.</li>
+          <li>"Stay on them" — after every punch. Don't back up. Don't reset to distance. Stay in their face.</li>
+          <li>"Head moving, always" — especially when pressing forward. If their head stops, that's a target. Cue this every round.</li>
+          <li>"Compact steps" — when they start lunging. Duran's footwork is short, controlled advances. Long steps overcommit and cost balance.</li>
+        </ul>
+      </div>
+    </div>
+    <!-- END TEACHING SKILLS -->
+
+    <!-- ===== CLIENT SESSIONS ===== -->
+    <div class="coach-panel" data-coach="sessions">
+      <p class="technique-intro" style="margin-bottom:18px;">Three ready-made session structures — beginner, intermediate, advanced. Each one works for any of the three fighter styles. Swap in the relevant footwork lab drills and pad flows depending on which style you're teaching that day.</p>
+
+      <!-- Beginner -->
+      <div class="teach-card">
+        <span class="level-badge beginner">BEGINNER — SESSIONS 1–8</span>
+        <h4>GOALS: STANCE · BASIC FOOTWORK · ONE-TWO</h4>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Don't rush past this phase. A client with clean fundamentals will always beat one who learned combos too fast.</p>
+        <ul>
+          <li><b style="color:var(--gold-bright);">10 min</b> — Footwork Lab Phase 1 drills for that day's style. No punches at all. Just stance and footwork.</li>
+          <li><b style="color:var(--gold-bright);">5 min</b> — Shadow boxing: movement only, no punches. You call directions, they move.</li>
+          <li><b style="color:var(--gold-bright);">10 min</b> — Jab only. No other punches. Every rep must have the correct stance, footwork, and snap. Only add the cross once the jab is consistent.</li>
+          <li><b style="color:var(--gold-bright);">10 min</b> — Pad work Flow 1 for that style. Slow pace, correct over fast.</li>
+          <li><b style="color:var(--gold-bright);">10 min</b> — Heavy bag: apply what they just learned on pads. You watch and cue.</li>
+          <li><b style="color:var(--gold-bright);">5 min</b> — Core + cool down.</li>
+        </ul>
+      </div>
+
+      <!-- Intermediate -->
+      <div class="teach-card">
+        <span class="level-badge intermediate">INTERMEDIATE — SESSIONS 9–20</span>
+        <h4>GOALS: COMBINATIONS · DEFENCE · STYLE IDENTITY</h4>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Client has clean fundamentals. Now teach them to chain punches and add their first defensive tools.</p>
+        <ul>
+          <li><b style="color:var(--gold-bright);">8 min</b> — Footwork Lab Phase 2 drills. Strength-based — they should be sweating before they touch a bag.</li>
+          <li><b style="color:var(--gold-bright);">5 min</b> — Shadow boxing: full movement + combinations. No pads yet.</li>
+          <li><b style="color:var(--gold-bright);">15 min</b> — Pad work Flows 1 and 2 for that style. Start Flow 1 slow to warm up, then build pace into Flow 2.</li>
+          <li><b style="color:var(--gold-bright);">15 min</b> — Heavy bag: specific skill rounds — round 1 footwork focus, round 2 combo focus, round 3 mix.</li>
+          <li><b style="color:var(--gold-bright);">5 min</b> — One defensive drill (slip, pull-back, or check hook depending on style).</li>
+          <li><b style="color:var(--gold-bright);">5 min</b> — Conditioning finisher + core.</li>
+        </ul>
+      </div>
+
+      <!-- Advanced -->
+      <div class="teach-card">
+        <span class="level-badge advanced">ADVANCED — SESSIONS 21+</span>
+        <h4>GOALS: FULL STYLE · FIGHT IQ · ROUND MANAGEMENT</h4>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Client has the tools. Now build the intelligence to use them correctly and the gas tank to use them all fight.</p>
+        <ul>
+          <li><b style="color:var(--gold-bright);">5 min</b> — Footwork Lab Phase 3 endurance round. The whole round in stance, no breaks.</li>
+          <li><b style="color:var(--gold-bright);">5 min</b> — Shadow boxing: full simulation, no coaching. You watch. Debrief after.</li>
+          <li><b style="color:var(--gold-bright);">20 min</b> — Pad work: all three flows for that style in sequence. Increase pace round by round.</li>
+          <li><b style="color:var(--gold-bright);">15 min</b> — Heavy bag: 5 x 3-min rounds with a specific theme per round (footwork, combos, defence, pressure, full mix).</li>
+          <li><b style="color:var(--gold-bright);">5 min</b> — Debrief: what worked, what broke down, what to focus on next session.</li>
+          <li><b style="color:var(--gold-bright);">5 min</b> — Conditioning finisher.</li>
+        </ul>
+      </div>
+    </div>
+    <!-- END CLIENT SESSIONS -->
+
+  </div>
+</div>
+<!-- ===== END FOLDER: COACH HUB ===== -->
+
 <footer class="wrap">
   <table class="week-table">
     <tr><td class="wd">TUE</td><td class="wn">Range War</td><td>Pawing jab, stiff-arm control</td></tr>
@@ -2601,6 +3344,24 @@
   });
 
   loadFocus();
+
+  // ---------- COACH SUB-TABS ----------
+  var coachSubTabs = document.querySelectorAll('.coach-sub-tab');
+  var coachPanels = document.querySelectorAll('.coach-panel');
+  coachSubTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var key = tab.getAttribute('data-coach');
+      coachSubTabs.forEach(function(t){t.classList.toggle('active', t===tab);});
+      coachPanels.forEach(function(p){p.classList.toggle('active', p.getAttribute('data-coach')===key);});
+    });
+  });
+
+  // ---------- PAD FLOW ACCORDION ----------
+  document.querySelectorAll('.pad-flow-head').forEach(function(head){
+    head.addEventListener('click', function(){
+      head.parentElement.classList.toggle('open');
+    });
+  });
 
 })();
 </script>
