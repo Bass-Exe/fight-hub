@@ -760,6 +760,135 @@
   .level-badge.intermediate{color:var(--gold); border-color:rgba(232,169,60,0.5);}
   .level-badge.advanced{color:var(--red); border-color:rgba(200,30,44,0.5);}
 
+  /* ---------- FOOT PLACEMENT GUIDE ---------- */
+  .fp-card{
+    margin:22px 0 10px;
+    border:1px solid var(--line);
+    background:var(--bg-elev);
+  }
+  .fp-card-head{
+    padding:10px 14px;
+    border-bottom:1px solid var(--line);
+    background:rgba(0,0,0,0.25);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .fp-card-head h4{
+    font-family:var(--font-display);
+    font-size:17px;
+    letter-spacing:0.06em;
+    color:var(--cream);
+    margin:0;
+  }
+  .fp-card-head span{
+    font-family:var(--font-mono);
+    font-size:9px;
+    letter-spacing:0.12em;
+    color:var(--muted);
+    background:var(--bg);
+    border:1px solid var(--line);
+    padding:3px 8px;
+  }
+  .fp-grid{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:0;
+  }
+  .fp-clock-col{
+    padding:18px 16px;
+    border-right:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+  .fp-clock-col svg{display:block;}
+  .fp-aim-pill{
+    font-family:var(--font-mono);
+    font-size:9px;
+    letter-spacing:0.08em;
+    text-align:center;
+    padding:5px 8px;
+    background:rgba(200,168,64,0.1);
+    border:1px solid rgba(200,168,64,0.3);
+    color:var(--gold-bright);
+    width:100%;
+  }
+  .fp-detail-col{
+    padding:14px 16px;
+  }
+  .fp-foot-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .fp-foot-block{
+    background:var(--bg);
+    border:1px solid var(--line);
+    padding:10px 12px;
+  }
+  .fp-foot-block.lead{ border-top:3px solid var(--gold);}
+  .fp-foot-block.rear{ border-top:3px solid var(--red);}
+  .fp-foot-block h5{
+    font-family:var(--font-mono);
+    font-size:9.5px;
+    letter-spacing:0.12em;
+    color:var(--gold-bright);
+    margin:0 0 6px;
+  }
+  .fp-foot-block.rear h5{ color:var(--red);}
+  .fp-foot-block p{
+    font-size:12.5px;
+    color:#d0c8b8;
+    margin:0 0 5px;
+    line-height:1.45;
+  }
+  .fp-foot-block .fp-degree{
+    font-family:var(--font-display);
+    font-size:22px;
+    color:var(--gold-bright);
+    line-height:1;
+    margin-bottom:3px;
+  }
+  .fp-foot-block.rear .fp-degree{ color:var(--red);}
+  .fp-foot-block .fp-clock{
+    font-family:var(--font-mono);
+    font-size:9px;
+    color:var(--muted);
+    letter-spacing:0.08em;
+    margin-bottom:6px;
+  }
+  .fp-cue-list{
+    margin-top:10px;
+    background:var(--bg);
+    border:1px solid var(--line);
+    padding:10px 12px;
+  }
+  .fp-cue-list h5{
+    font-family:var(--font-mono);
+    font-size:9.5px;
+    letter-spacing:0.12em;
+    color:var(--gold-bright);
+    margin:0 0 8px;
+  }
+  .fp-cue-list li{
+    font-size:12.5px;
+    color:#d0c8b8;
+    padding:4px 0 4px 14px;
+    border-top:1px dashed var(--line);
+    position:relative;
+    line-height:1.4;
+  }
+  .fp-cue-list li:first-child{border-top:none;}
+  .fp-cue-list li::before{content:"→"; position:absolute; left:0; color:var(--gold); font-size:11px;}
+  @media(max-width:520px){
+    .fp-grid{grid-template-columns:1fr;}
+    .fp-clock-col{border-right:none; border-bottom:1px solid var(--line);}
+    .fp-foot-row{grid-template-columns:1fr;}
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     margin-top:40px;
@@ -921,7 +1050,73 @@
       <span class="fl-tag">KRONK — RANGE &amp; PIVOT</span>
     </div>
     <div class="footwork-lab-body">
-      <p><b style="color:var(--gold-bright);">Why Kronk footwork is hard:</b> The tall, slightly bladed stance demands unusual hip flexibility to pivot cleanly and unusual calf/glute strength to stay on the balls of your feet for long rounds. Most people either collapse their weight back to the heel after a few minutes (killing their pivot speed) or lose the stance entirely and go flat. The fix is to train the foot and hip strength separately before expecting it to last in rounds.</p>
+      <p><b style="color:var(--gold-bright);">Before this section:</b> Check the foot placement guide below. A tall bladed Kronk stance only works when the feet are pointed in the right direction. Get this wrong and the pivot has nowhere to go.</p>
+
+      <!-- KRONK FOOT PLACEMENT GUIDE -->
+      <div class="fp-card" style="margin-bottom:20px;">
+        <div class="fp-card-head">
+          <h4>Foot Placement Guide</h4>
+          <span>KRONK — EXACT POSITIONING</span>
+        </div>
+        <div class="fp-grid">
+          <div class="fp-clock-col">
+            <!-- Clock SVG showing foot positions -->
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <!-- Clock face -->
+              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <!-- Opponent label at top -->
+              <text x="60" y="9" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)" letter-spacing="0.05em">OPPONENT</text>
+              <!-- Clock numbers -->
+              <text x="60" y="18"  text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">12</text>
+              <text x="107" y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">3</text>
+              <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">6</text>
+              <text x="13"  y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">9</text>
+              <!-- 11 o'clock tick -->
+              <text x="24"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">11</text>
+              <!-- 2 o'clock tick -->
+              <text x="97"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">2</text>
+              <!-- Center -->
+              <circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.3)"/>
+              <!-- LEAD FOOT indicator at 11 o'clock -->
+              <circle cx="31" cy="27" r="7" fill="#c8a840" opacity="0.9"/>
+              <text x="31" y="31" text-anchor="middle" font-family="monospace" font-size="7" fill="#000" font-weight="700">L</text>
+              <!-- REAR FOOT indicator at 2 o'clock -->
+              <circle cx="95" cy="27" r="7" fill="#c8282c" opacity="0.85"/>
+              <text x="95" y="31" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" font-weight="700">R</text>
+              <!-- Direction line from center to lead foot -->
+              <line x1="60" y1="60" x2="35" y2="31" stroke="#c8a840" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+              <!-- Direction line from center to rear foot -->
+              <line x1="60" y1="60" x2="91" y2="31" stroke="#c8282c" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+            </svg>
+            <div class="fp-aim-pill">LEAD TOE AIM<br>OPPONENT'S LEAD SHOULDER</div>
+          </div>
+          <div class="fp-detail-col">
+            <div class="fp-foot-row">
+              <div class="fp-foot-block lead">
+                <h5>LEAD FOOT (L)</h5>
+                <div class="fp-degree">15–20°</div>
+                <div class="fp-clock">≈ 11 O'CLOCK</div>
+                <p>Points slightly outward from the direct line to your opponent. Toes angle toward their <b style="color:var(--gold-bright);">lead (left) shoulder</b> — not their nose, not their hip.</p>
+                <p>Heel is grounded but light. Ball of foot carries most pressure. This foot is your pivot point — the jab fires off it, the check hook pivots on it.</p>
+              </div>
+              <div class="fp-foot-block rear">
+                <h5>REAR FOOT (R)</h5>
+                <div class="fp-degree">40–45°</div>
+                <div class="fp-clock">≈ 2 O'CLOCK</div>
+                <p>Angled outward behind the lead foot. <b style="color:var(--red);">Rear heel slightly outside</b> the lead heel — not directly behind it. This creates the stable base for the Kronk stance.</p>
+                <p>Ball of foot loaded and ready. The rear foot is your power source for the cross and your push engine for forward movement.</p>
+              </div>
+            </div>
+            <ul class="fp-cue-list">
+              <h5>COACHING CUES</h5>
+              <li><b style="color:var(--gold-bright);">"Lead toe at their lead shoulder."</b> Not at their chest (too square), not at their hip (too wide). Imagine their left shoulder has a laser target on it — your lead toe points there.</li>
+              <li><b style="color:var(--gold-bright);">"The stance is bladed but the lead toe still faces them."</b> Your body turns sideways but your front foot doesn't swing with it. Keep that lead toe tracking toward the opponent even as your torso blades.</li>
+              <li><b style="color:var(--gold-bright);">"Rear heel outside, not behind."</b> If you line both heels up front-to-back on the same narrow line, you'll fall sideways. The rear heel needs that slight outward offset to create width.</li>
+              <li><b style="color:var(--gold-bright);">"Pivot lives in the lead ball."</b> Every pivot — check hook, angle change — rotates on the ball of the lead foot. If that ball isn't loaded, you have no pivot. Check it before every round.</li>
+            </ul>
+          </div>
+        </div>
+      </div> The tall, slightly bladed stance demands unusual hip flexibility to pivot cleanly and unusual calf/glute strength to stay on the balls of your feet for long rounds. Most people either collapse their weight back to the heel after a few minutes (killing their pivot speed) or lose the stance entirely and go flat. The fix is to train the foot and hip strength separately before expecting it to last in rounds.</p>
 
       <h4 class="skill-workout-title">PHASE 1 — COORDINATION (do this before any bag work)</h4>
       <div class="drill-row">
@@ -1843,7 +2038,64 @@
         <span class="fl-tag">SUGAR RAY — LATERAL MOVEMENT</span>
       </div>
       <div class="footwork-lab-body">
-        <p><b style="color:var(--gold-bright);">Why Leonard's footwork is hard:</b> The 50/50 weight balance sounds easy but it's deceptive — most people unconsciously load one foot, and then their movement is slow in one direction. Leonard's real challenge is the constant resetting. He almost never stood still for more than two punches. Building that habit takes coordination training first, then strength to sustain it, then the endurance to keep moving at round 8 the same way you moved at round 1.</p>
+        <p><b style="color:var(--gold-bright);">Before this section:</b> Check foot placement below. Leonard's 50/50 reset is only possible when the feet start in the right position. A misaligned lead foot kills the lateral movement before it begins.</p>
+
+        <!-- SUGAR RAY FOOT PLACEMENT GUIDE -->
+        <div class="fp-card" style="margin-bottom:20px;">
+          <div class="fp-card-head">
+            <h4>Foot Placement Guide</h4>
+            <span>SUGAR RAY — EXACT POSITIONING</span>
+          </div>
+          <div class="fp-grid">
+            <div class="fp-clock-col">
+              <svg viewBox="0 0 120 120" width="120" height="120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                <text x="60" y="9"   text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)">OPPONENT</text>
+                <text x="60" y="18"  text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">12</text>
+                <text x="107" y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">3</text>
+                <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">6</text>
+                <text x="13"  y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">9</text>
+                <text x="24"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">11</text>
+                <text x="97"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">2</text>
+                <circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.3)"/>
+                <!-- LEAD at 11 o'clock -->
+                <circle cx="31" cy="27" r="7" fill="#c8a840" opacity="0.9"/>
+                <text x="31" y="31" text-anchor="middle" font-family="monospace" font-size="7" fill="#000" font-weight="700">L</text>
+                <!-- REAR at 2 o'clock -->
+                <circle cx="95" cy="27" r="7" fill="#c8282c" opacity="0.85"/>
+                <text x="95" y="31" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" font-weight="700">R</text>
+                <line x1="60" y1="60" x2="35" y2="31" stroke="#c8a840" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+                <line x1="60" y1="60" x2="91" y2="31" stroke="#c8282c" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+              </svg>
+              <div class="fp-aim-pill">LEAD TOE AIM<br>PAST THEIR LEAD GLOVE</div>
+            </div>
+            <div class="fp-detail-col">
+              <div class="fp-foot-row">
+                <div class="fp-foot-block lead">
+                  <h5>LEAD FOOT (L)</h5>
+                  <div class="fp-degree">15–25°</div>
+                  <div class="fp-clock">≈ 11 O'CLOCK</div>
+                  <p>Points just past the opponent's <b style="color:var(--gold-bright);">lead glove and shoulder</b>. Think of it as aiming just outside their extended jab when it's fully out.</p>
+                  <p>Tripod contact: big toe, little toe, heel — all three grounded. Weight through the ball but heel connected. The heel lifts only on the pivot.</p>
+                </div>
+                <div class="fp-foot-block rear">
+                  <h5>REAR FOOT (R)</h5>
+                  <div class="fp-degree">35–45°</div>
+                  <div class="fp-clock">≈ 2 O'CLOCK</div>
+                  <p><b style="color:var(--red);">Rear heel sits slightly OUTSIDE the lead heel line</b> — not directly behind it. This is Leonard's critical detail: the offset creates the stable triangle for the constant lateral resetting.</p>
+                  <p>Heel stays light. Ball loaded. Rear heel rotates up on the cross.</p>
+                </div>
+              </div>
+              <ul class="fp-cue-list">
+                <h5>COACHING CUES</h5>
+                <li><b style="color:var(--gold-bright);">"Lead toe points just past their lead glove."</b> Whenever that glove extends to throw a jab, your front foot is already aimed at the space just outside it. This is what makes the jab and the lateral exit flow naturally together.</li>
+                <li><b style="color:var(--gold-bright);">"Check your rear heel — is it outside the lead?"</b> Drop your eyes down between rounds. If both heels are on the same narrow front-to-back line, you'll tip sideways trying to reset laterally. Widen that rear heel out slightly.</li>
+                <li><b style="color:var(--gold-bright);">"50/50 means alive, not parked."</b> Equal weight doesn't mean still weight. Feel both feet equally but feel them as springs — ready to fire in any direction. If you feel parked, you've lost the 50/50.</li>
+                <li><b style="color:var(--gold-bright);">"Foot first, always."</b> Leonard's jab only works because the lead foot steps simultaneously with the punch. If the foot moves after the jab — you're throwing from flat. Foot and fist land at exactly the same moment.</li>
+              </ul>
+            </div>
+          </div>
+        </div> The 50/50 weight balance sounds easy but it's deceptive — most people unconsciously load one foot, and then their movement is slow in one direction. Leonard's real challenge is the constant resetting. He almost never stood still for more than two punches. Building that habit takes coordination training first, then strength to sustain it, then the endurance to keep moving at round 8 the same way you moved at round 1.</p>
 
         <h4 class="skill-workout-title">PHASE 1 — COORDINATION</h4>
         <div class="drill-row">
@@ -2684,7 +2936,64 @@
         <span class="fl-tag">DURAN — FORWARD PRESSURE</span>
       </div>
       <div class="footwork-lab-body">
-        <p><b style="color:var(--gold-bright);">Why Duran's footwork is hard:</b> The forward lean is the hardest part. Duran's weight sits slightly forward — built to advance — but most people who try it fall into a hunched, off-balance posture because their core and hip flexors aren't strong enough to hold the lean cleanly. The second problem is endurance: walking someone down for 12 rounds requires both physical conditioning and mental commitment to keep pressing when your legs are tired. Build the strength first, then the habit.</p>
+        <p><b style="color:var(--gold-bright);">Before this section:</b> Check foot placement below. Duran's compact, forward-loaded stance depends on precise foot direction — too square and you lose the lean, too bladed and you lose the pressure-walking power.</p>
+
+        <!-- DURAN FOOT PLACEMENT GUIDE -->
+        <div class="fp-card" style="margin-bottom:20px;">
+          <div class="fp-card-head">
+            <h4>Foot Placement Guide</h4>
+            <span>DURAN — EXACT POSITIONING</span>
+          </div>
+          <div class="fp-grid">
+            <div class="fp-clock-col">
+              <svg viewBox="0 0 120 120" width="120" height="120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                <text x="60" y="9"   text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)">OPPONENT</text>
+                <text x="60" y="18"  text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">12</text>
+                <text x="107" y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">3</text>
+                <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">6</text>
+                <text x="13"  y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">9</text>
+                <text x="30"  y="24" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">12–1</text>
+                <text x="97"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">2</text>
+                <circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.3)"/>
+                <!-- LEAD closer to 12 (more square, Duran's compact stance) -->
+                <circle cx="42" cy="21" r="7" fill="#c8a840" opacity="0.9"/>
+                <text x="42" y="25" text-anchor="middle" font-family="monospace" font-size="7" fill="#000" font-weight="700">L</text>
+                <!-- REAR at 2 o'clock -->
+                <circle cx="95" cy="27" r="7" fill="#c8282c" opacity="0.85"/>
+                <text x="95" y="31" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" font-weight="700">R</text>
+                <line x1="60" y1="60" x2="46" y2="25" stroke="#c8a840" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+                <line x1="60" y1="60" x2="91" y2="31" stroke="#c8282c" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+              </svg>
+              <div class="fp-aim-pill">LEAD TOE AIM<br>OPPONENT'S BODY, NOT FACE</div>
+            </div>
+            <div class="fp-detail-col">
+              <div class="fp-foot-row">
+                <div class="fp-foot-block lead">
+                  <h5>LEAD FOOT (L)</h5>
+                  <div class="fp-degree">10–15°</div>
+                  <div class="fp-clock">≈ 12–1 O'CLOCK</div>
+                  <p>More square than the other styles — points closer to <b style="color:var(--gold-bright);">straight ahead, toward the opponent's body/sternum</b> rather than angled off to their shoulder. This is what lets you drive forward.</p>
+                  <p>Weight forward and loaded — this foot is the anchor your forward lean pushes into. Ball of foot dominant, heel barely grounded.</p>
+                </div>
+                <div class="fp-foot-block rear">
+                  <h5>REAR FOOT (R)</h5>
+                  <div class="fp-degree">40–45°</div>
+                  <div class="fp-clock">≈ 2 O'CLOCK</div>
+                  <p>More angled than the lead foot — this asymmetry (square lead, angled rear) is what makes Duran's stance compact and built for advancing rather than circling.</p>
+                  <p><b style="color:var(--red);">Rear heel outside the lead heel</b>, same principle as the other styles, but the whole stance sits narrower front-to-back — shorter steps, more pressure.</p>
+                </div>
+              </div>
+              <ul class="fp-cue-list">
+                <h5>COACHING CUES</h5>
+                <li><b style="color:var(--gold-bright);">"Lead toe points at their belt buckle, not their chin."</b> Duran's foot aims lower and more central than Leonard's or Kronk's — it's built for closing distance and body work, not circling at range.</li>
+                <li><b style="color:var(--gold-bright);">"More square up front, more angled in back."</b> This is the Duran asymmetry. If both feet match the same angle, you'll default into a bladed range stance and lose the forward-pressure advantage.</li>
+                <li><b style="color:var(--gold-bright);">"Stance is narrower front-to-back than Kronk or Leonard."</b> Your steps should be shorter and more frequent — think many small advances, not big committed strides.</li>
+                <li><b style="color:var(--gold-bright);">"Weight loads forward through the lead foot."</b> Unlike the 50/50 of Leonard, Duran's stance carries slightly more weight forward — that's the engine behind the ankle-lean and the pressure walk.</li>
+              </ul>
+            </div>
+          </div>
+        </div> The forward lean is the hardest part. Duran's weight sits slightly forward — built to advance — but most people who try it fall into a hunched, off-balance posture because their core and hip flexors aren't strong enough to hold the lean cleanly. The second problem is endurance: walking someone down for 12 rounds requires both physical conditioning and mental commitment to keep pressing when your legs are tired. Build the strength first, then the habit.</p>
 
         <h4 class="skill-workout-title">PHASE 1 — COORDINATION</h4>
         <div class="drill-row">
@@ -3690,6 +3999,61 @@
       </div>
     </div>
 
+    <!-- SIMS FOOT PLACEMENT GUIDE -->
+    <div class="fp-card" style="margin-top:22px;">
+      <div class="fp-card-head">
+        <h4>Foot Placement Guide</h4>
+        <span>SIMS — EXACT POSITIONING</span>
+      </div>
+      <div class="fp-grid">
+        <div class="fp-clock-col">
+          <svg viewBox="0 0 120 120" width="120" height="120">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <text x="60" y="9"   text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)">OPPONENT</text>
+            <text x="60" y="18"  text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">12</text>
+            <text x="107" y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">3</text>
+            <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">6</text>
+            <text x="13"  y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">9</text>
+            <text x="24"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">11</text>
+            <text x="97"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">2</text>
+            <circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="31" cy="27" r="7" fill="#c8a840" opacity="0.9"/>
+            <text x="31" y="31" text-anchor="middle" font-family="monospace" font-size="7" fill="#000" font-weight="700">L</text>
+            <circle cx="95" cy="27" r="7" fill="#c8282c" opacity="0.85"/>
+            <text x="95" y="31" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" font-weight="700">R</text>
+            <line x1="60" y1="60" x2="35" y2="31" stroke="#c8a840" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+            <line x1="60" y1="60" x2="91" y2="31" stroke="#c8282c" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+          </svg>
+          <div class="fp-aim-pill">LEAD TOE AIM<br>THEIR CHIN/LEAD SHOULDER</div>
+        </div>
+        <div class="fp-detail-col">
+          <div class="fp-foot-row">
+            <div class="fp-foot-block lead">
+              <h5>LEAD FOOT (L)</h5>
+              <div class="fp-degree">15–20°</div>
+              <div class="fp-clock">≈ 11 O'CLOCK</div>
+              <p>Points toward the opponent's <b style="color:var(--gold-bright);">chin or lead shoulder</b> — this is your stick's target line. Wherever the toe points is where your jab naturally lines up.</p>
+              <p>Chin behind lead foot — the key Sims cue. Check this every time you reset: is your chin actually stacked over this foot, or has it drifted forward past it?</p>
+            </div>
+            <div class="fp-foot-block rear">
+              <h5>REAR FOOT (R)</h5>
+              <div class="fp-degree">40–45°</div>
+              <div class="fp-clock">≈ 2 O'CLOCK</div>
+              <p>Back foot always on the ball — never flat. Angled out, ready to push in, pull out, or pivot at any instant. This is your launch foot for the pull-back and the roll.</p>
+              <p>Slight crouch overall — being the shorter fighter means using that natural lower center of gravity, so this foot carries a bit more bend in the knee than a tall stance would.</p>
+            </div>
+          </div>
+          <ul class="fp-cue-list">
+            <h5>COACHING CUES</h5>
+            <li><b style="color:var(--gold-bright);">"Chin behind lead foot — always."</b> This is the single most important checkpoint in the Sims system. If your chin is ahead of your lead foot, you're leaning into range instead of standing balanced behind your own jab.</li>
+            <li><b style="color:var(--gold-bright);">"Lead toe finds their chin, not their chest."</b> Aim slightly higher than you would in a pure outside-boxer stance — you're shorter, so your natural punching line already angles upward toward a taller opponent's chin.</li>
+            <li><b style="color:var(--gold-bright);">"Back foot never sleeps."</b> Check the rear heel between every exchange — is it up off the ground, ball-loaded? A flat rear foot means you can't pull, roll, or slip on the next punch.</li>
+            <li><b style="color:var(--gold-bright);">"Outside to inside — feet decide the range, not your hands."</b> Your stick controls distance, but it's your feet that actually move you between outside range and inside range. Never let the hands try to do the feet's job.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <!-- SIMS WEEKLY SCHEDULE -->
     <h3 class="workout-title" style="margin-top:28px;">WEEKLY SCHEDULE</h3>
     <nav class="day-tabs wrap" id="simsDayTabs" style="position:relative; top:auto;">
@@ -3924,7 +4288,66 @@
         <span class="fl-tag">SÁNCHEZ — BOUNCE · TRANSITION · RANGE CONTROL</span>
       </div>
       <div class="footwork-lab-body">
-        <p><b style="color:var(--gold-bright);">Why Sánchez's footwork is hard:</b> The bladed-to-square transition feels unnatural — most people are taught to stay in one stance. Sánchez's genius is that he only squares up AT the exact moment he needs body movement or combination power, then snaps right back to bladed. The bounce also requires calf and hip endurance to maintain for 12 rounds without losing balance or stability.</p>
+        <p><b style="color:var(--gold-bright);">Before this section:</b> Check foot placement below. Sánchez's system depends on precisely knowing where your feet are pointed in BOTH modes — bladed range stance and squared close-range stance — since you'll be switching between them constantly.</p>
+
+        <!-- SÁNCHEZ FOOT PLACEMENT GUIDE -->
+        <div class="fp-card" style="margin-bottom:20px;">
+          <div class="fp-card-head">
+            <h4>Foot Placement Guide</h4>
+            <span>SÁNCHEZ — EXACT POSITIONING (BOTH MODES)</span>
+          </div>
+          <div class="fp-grid">
+            <div class="fp-clock-col">
+              <svg viewBox="0 0 120 120" width="120" height="120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                <text x="60" y="9"   text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)">OPPONENT</text>
+                <text x="60" y="18"  text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">12</text>
+                <text x="107" y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">3</text>
+                <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">6</text>
+                <text x="13"  y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">9</text>
+                <text x="24"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">11</text>
+                <text x="97"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">2</text>
+                <circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.3)"/>
+                <!-- Bladed lead at 11 -->
+                <circle cx="31" cy="27" r="7" fill="#c8a840" opacity="0.9"/>
+                <text x="31" y="31" text-anchor="middle" font-family="monospace" font-size="7" fill="#000" font-weight="700">L</text>
+                <circle cx="95" cy="27" r="7" fill="#c8282c" opacity="0.85"/>
+                <text x="95" y="31" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" font-weight="700">R</text>
+                <line x1="60" y1="60" x2="35" y2="31" stroke="#c8a840" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+                <line x1="60" y1="60" x2="91" y2="31" stroke="#c8282c" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+                <!-- Square mode ghost markers (dashed, inner ring, closer to 12) -->
+                <circle cx="46" cy="19" r="5" fill="none" stroke="#c8a840" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+                <circle cx="85" cy="22" r="5" fill="none" stroke="#c8282c" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+              </svg>
+              <div class="fp-aim-pill">SOLID = BLADED · GHOST = SQUARED</div>
+            </div>
+            <div class="fp-detail-col">
+              <div class="fp-foot-row">
+                <div class="fp-foot-block lead">
+                  <h5>LEAD FOOT — BLADED (RANGE)</h5>
+                  <div class="fp-degree">18–22°</div>
+                  <div class="fp-clock">≈ 11 O'CLOCK</div>
+                  <p>At range: points toward the opponent's <b style="color:var(--gold-bright);">lead shoulder</b>, same family as Kronk's angle. This is your probing-jab stance.</p>
+                  <p><b style="color:var(--red);">At close range (squared):</b> rotates in toward roughly 10–15° — toes come closer to pointing straight at the opponent's chest. This is the one-step transition.</p>
+                </div>
+                <div class="fp-foot-block rear">
+                  <h5>REAR FOOT — BLADED (RANGE)</h5>
+                  <div class="fp-degree">40–45°</div>
+                  <div class="fp-clock">≈ 2 O'CLOCK</div>
+                  <p>Standard outward angle for the bounce and range control. Ball of foot loaded for the constant light bounce.</p>
+                  <p><b style="color:var(--red);">At close range (squared):</b> rotates in toward roughly 25–30° — both feet becoming more parallel to enable full hip rotation for combinations.</p>
+                </div>
+              </div>
+              <ul class="fp-cue-list">
+                <h5>COACHING CUES</h5>
+                <li><b style="color:var(--gold-bright);">"Bladed at range, squared up close — know which one your feet are in."</b> Before every session, physically feel the difference: bladed feels narrower and angled, squared feels wider and more parallel. You should be able to tell with your eyes closed.</li>
+                <li><b style="color:var(--gold-bright);">"Lead toe drifts inward as you close distance."</b> As you step from bladed to squared, don't think about rotating the foot separately — let it happen naturally as part of the single step-in motion.</li>
+                <li><b style="color:var(--gold-bright);">"Snap back to bladed angles the instant the combo ends."</b> The moment your hands stop punching, your feet should already be re-rotating back to the bladed range angles. Don't wait — it happens simultaneously with your exit step.</li>
+                <li><b style="color:var(--gold-bright);">"The bounce only works from the bladed angle."</b> If you try to bounce while squared up, you'll lose balance. That's your signal you've stayed square too long — get back to bladed.</li>
+              </ul>
+            </div>
+          </div>
+        </div> The bladed-to-square transition feels unnatural — most people are taught to stay in one stance. Sánchez's genius is that he only squares up AT the exact moment he needs body movement or combination power, then snaps right back to bladed. The bounce also requires calf and hip endurance to maintain for 12 rounds without losing balance or stability.</p>
 
         <h4 class="skill-workout-title">PHASE 1 — COORDINATION</h4>
         <div class="drill-row">
@@ -4272,7 +4695,64 @@
         <span class="fl-tag">TONEY — SHELL MOVEMENT · INSIDE CONTROL</span>
       </div>
       <div class="footwork-lab-body">
-        <p><b style="color:var(--gold-bright);">Why the Philly Shell is hard to move in:</b> <cite index="4-1">The Philly Shell makes it more challenging to move laterally and can leave you unbalanced if you don't train the footwork specifically.</cite> Most people learn the shell as a guard position but never train how to MOVE while in it — and then it breaks down the moment they try to do anything dynamic. The footwork has to be drilled separately from the punching.</p>
+        <p><b style="color:var(--gold-bright);">Before this section:</b> Check foot placement below. The Philly Shell's foot angle is easy to overlook because the guard demands so much attention — but the wrong foot direction makes the shell unstable the moment you try to move or roll.</p>
+
+        <!-- TONEY FOOT PLACEMENT GUIDE -->
+        <div class="fp-card" style="margin-bottom:20px;">
+          <div class="fp-card-head">
+            <h4>Foot Placement Guide</h4>
+            <span>TONEY — EXACT POSITIONING</span>
+          </div>
+          <div class="fp-grid">
+            <div class="fp-clock-col">
+              <svg viewBox="0 0 120 120" width="120" height="120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                <text x="60" y="9"   text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)">OPPONENT</text>
+                <text x="60" y="18"  text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">12</text>
+                <text x="107" y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">3</text>
+                <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">6</text>
+                <text x="13"  y="64" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)">9</text>
+                <text x="20"  y="30" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">10–11</text>
+                <text x="98"  y="28" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)">2–3</text>
+                <circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.3)"/>
+                <!-- LEAD slightly more toward 10-11 (more bladed for the shell) -->
+                <circle cx="25" cy="33" r="7" fill="#c8a840" opacity="0.9"/>
+                <text x="25" y="37" text-anchor="middle" font-family="monospace" font-size="7" fill="#000" font-weight="700">L</text>
+                <!-- REAR at 2-3, more angled for the shell's rear-leaning posture -->
+                <circle cx="98" cy="35" r="7" fill="#c8282c" opacity="0.85"/>
+                <text x="98" y="39" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" font-weight="700">R</text>
+                <line x1="60" y1="60" x2="29" y2="37" stroke="#c8a840" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+                <line x1="60" y1="60" x2="94" y2="39" stroke="#c8282c" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+              </svg>
+              <div class="fp-aim-pill">LEAD TOE AIM<br>OPPONENT'S REAR HIP</div>
+            </div>
+            <div class="fp-detail-col">
+              <div class="fp-foot-row">
+                <div class="fp-foot-block lead">
+                  <h5>LEAD FOOT (L)</h5>
+                  <div class="fp-degree">20–25°</div>
+                  <div class="fp-clock">≈ 10–11 O'CLOCK</div>
+                  <p>More heavily bladed than most other styles — points toward the opponent's <b style="color:var(--gold-bright);">rear hip</b>, angled well off their centerline. This is what makes the shell's profile a small target.</p>
+                  <p>Weight varies constantly here — sometimes more forward when pressing, sometimes shifted back when leaning into a roll. This foot has to handle both jobs.</p>
+                </div>
+                <div class="fp-foot-block rear">
+                  <h5>REAR FOOT (R)</h5>
+                  <div class="fp-degree">45–50°</div>
+                  <div class="fp-clock">≈ 2–3 O'CLOCK</div>
+                  <p>Angled sharply outward — more than the other styles. This wider rear angle supports the rear-leaning posture the shoulder roll depends on.</p>
+                  <p>Ball loaded, ready to drive the counter the instant the roll completes. This foot fires the overhand right and the pressure-walk push.</p>
+                </div>
+              </div>
+              <ul class="fp-cue-list">
+                <h5>COACHING CUES</h5>
+                <li><b style="color:var(--gold-bright);">"Lead toe points at their rear hip, not their lead shoulder."</b> This is more bladed than Kronk or Leonard — the extra angle is what shrinks your profile enough for the shell to work as intended.</li>
+                <li><b style="color:var(--gold-bright);">"Your feet don't move much — your shoulder does."</b> Unlike styles built around constant footwork, the shell's power comes from staying relatively planted and using shoulder rotation. Don't over-shuffle; let the roll do the defensive work.</li>
+                <li><b style="color:var(--gold-bright);">"Check your rear foot angle before every roll."</b> The wider rear angle (45–50°) gives you the base to lean back into the roll without losing balance. If that rear foot drifts too square, the roll becomes wobbly.</li>
+                <li><b style="color:var(--gold-bright);">"Forward pressure still respects the blade."</b> Even when walking opponents down, don't square your feet up to charge — keep the bladed foot angles. Pressure in this system comes from small steps, not a square-on march.</li>
+              </ul>
+            </div>
+          </div>
+        </div> <cite index="4-1">The Philly Shell makes it more challenging to move laterally and can leave you unbalanced if you don't train the footwork specifically.</cite> Most people learn the shell as a guard position but never train how to MOVE while in it — and then it breaks down the moment they try to do anything dynamic. The footwork has to be drilled separately from the punching.</p>
 
         <h4 class="skill-workout-title">PHASE 1 — COORDINATION</h4>
         <div class="drill-row">
